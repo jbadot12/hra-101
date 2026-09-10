@@ -6,6 +6,8 @@
 - Created: September 9, 2026
 - Audience: New Unlock team members and live prospect conversations
 - Format: Single-page HTML with local visual assets and no framework dependencies
+- Public site: https://jbadot12.github.io/hra-101/
+- Public repository: https://github.com/jbadot12/hra-101
 
 ## Narrative direction
 
@@ -43,3 +45,14 @@ The experience explains HRAs through the consumer journey. It begins with the ga
 ## Next step
 
 Review the revised adaptive narrative, clinical language, reporting model, proof points, and visual direction with Jackson. Then finalize copy governance and hosting requirements before adding analytics, content management, or feedback collection.
+
+## Publishing updates
+
+GitHub Pages publishes the root of the `main` branch in `jbadot12/hra-101`. To release an update:
+
+1. Review and test the files in this local project folder.
+2. Copy `index.html`, `README.md`, `.nojekyll`, and the complete `assets/` folder into a fresh clone of the public repository.
+3. Commit and push the changes to `main`.
+4. Confirm the Pages deployment completes and verify the live URL.
+
+Keep the public repository limited to approved website files. Do not publish source decks, client documents, notes, or unrelated files from the Executive Assistant repository.

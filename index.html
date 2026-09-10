@@ -1,0 +1,1204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive introduction to Unlock Health Risk Assessments and the consumer journey they support.">
+  <link rel="icon" href="assets/unlock-red.png">
+  <title>HRA 101 | From interest to the right next step</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #161616;
+      --ink-soft: #494343;
+      --ink-faint: #7d7577;
+      --paper: #f7f7f6;
+      --surface: #ffffff;
+      --alabaster: #fcf0e6;
+      --rule: #d0d0d2;
+      --rule-dark: #a6a0a2;
+      --red: #db1217;
+      --red-dark: #740316;
+      --red-soft: #fde7e5;
+      --salmon: #fac2b9;
+      --sky: #7dc8ef;
+      --ocean: #217caa;
+      --ice: #dff0f8;
+      --shadow: 0 18px 54px rgba(22, 22, 22, .10);
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.62;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, select { font: inherit; }
+    button { color: inherit; }
+    a { color: var(--red-dark); text-underline-offset: 3px; }
+    a:hover { color: var(--red); }
+    :focus-visible { outline: 3px solid rgba(40, 94, 115, .5); outline-offset: 3px; }
+    h1, h2, h3, h4, p { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--sans); font-weight: 700; }
+    h1 { font-size: clamp(3rem, 7vw, 6.25rem); line-height: .94; letter-spacing: -.064em; }
+    h2 { font-size: clamp(2.15rem, 4.4vw, 4rem); line-height: 1; letter-spacing: -.048em; }
+    h3 { font-size: clamp(1.3rem, 2.3vw, 1.9rem); line-height: 1.2; letter-spacing: -.025em; }
+    .shell { width: min(1220px, calc(100% - 44px)); margin: 0 auto; }
+    .measure { max-width: 720px; }
+    .eyebrow {
+      margin-bottom: 12px;
+      color: var(--red-dark);
+      font-size: .76rem;
+      font-weight: 750;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .lede { color: var(--ink-soft); font-size: clamp(1.08rem, 1.8vw, 1.35rem); line-height: 1.55; }
+    .muted { color: var(--ink-soft); }
+    .fine { color: var(--ink-faint); font-size: .84rem; }
+    .section { position: relative; padding: 104px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 72px; }
+    .section:nth-of-type(odd) { background: rgba(255,255,255,.55); }
+    .section-head { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(280px, .65fr); gap: 48px; align-items: end; margin-bottom: 44px; }
+    .section-head p:last-child { margin-bottom: 0; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, .94);
+      backdrop-filter: blur(14px) saturate(130%);
+      border-bottom: 1px solid rgba(185, 179, 172, .7);
+    }
+    .topbar-inner {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .brand { display: flex; flex: 0 0 auto; align-items: center; gap: 14px; color: var(--ink); font-size: .83rem; font-weight: 700; letter-spacing: -.01em; text-decoration: none; }
+    .brand img { width: 64px; height: auto; display: block; }
+    .topnav { display: flex; gap: 18px; margin-left: auto; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+    .topnav::-webkit-scrollbar { display: none; }
+    .topnav a { color: var(--ink-soft); font-size: .8rem; text-decoration: none; }
+    .topnav a:hover, .topnav a.priority-link { color: var(--red); }
+    .topnav a.priority-link::after { content: ""; display: block; width: 100%; height: 2px; margin-top: 2px; background: var(--red); }
+
+    .hero { position: relative; overflow: hidden; padding: 86px 0 76px; background: #fff; border-bottom: 1px solid var(--rule); }
+    .hero::after { content: ""; position: absolute; right: -80px; bottom: -120px; width: 340px; height: 340px; border: 1px solid rgba(219,18,23,.22); border-radius: 50%; pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(340px, .72fr); gap: 58px; align-items: center; }
+    .hero h1 { max-width: 850px; margin-bottom: 26px; }
+    .hero h1 span { color: var(--red); }
+    .hero-visual { position: relative; min-height: 470px; overflow: hidden; border-radius: 42% 42% 18px 18px; background: var(--sky) url("assets/unlock-sky.jpg") center/cover; box-shadow: var(--shadow); }
+    .hero-visual::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(22,22,22,.78) 100%); }
+    .hero-visual::after { content: ""; position: absolute; top: 28px; right: 28px; bottom: 28px; left: 28px; border: 1px solid rgba(255,255,255,.82); border-radius: 44% 44% 10px 10px; }
+    .hero-side { position: absolute; right: 32px; bottom: 30px; left: 32px; z-index: 2; color: #fff; }
+    .hero-side strong { display: block; margin-bottom: 7px; font-size: 1.25rem; font-weight: 700; }
+    .hero-side p { margin-bottom: 0; color: rgba(255,255,255,.84); font-size: .93rem; }
+    .hero-rule { height: 1px; margin: 54px 0 26px; background: var(--rule-dark); }
+    .lens-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .lens-label { margin-right: 8px; color: var(--ink-faint); font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+    .chip {
+      min-height: 42px;
+      padding: 9px 15px;
+      border: 1px solid var(--rule-dark);
+      border-radius: 999px;
+      background: transparent;
+      cursor: pointer;
+    }
+    .chip:hover { border-color: var(--ink); }
+    .chip[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: white; }
+    .lens-note { min-height: 28px; margin: 18px 0 0; color: var(--ink-soft); font-size: .93rem; }
+    .lens-dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 22px; overflow: hidden; border: 1px solid var(--rule); border-radius: 12px; background: var(--rule); }
+    .lens-card { min-height: 122px; padding: 22px; background: #fff; }
+    .lens-card small { display: block; margin-bottom: 9px; color: var(--red-dark); font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .lens-card strong { display: block; font-size: 1rem; line-height: 1.38; }
+    .lens-card p { margin: 7px 0 0; color: var(--ink-soft); font-size: .84rem; line-height: 1.45; }
+    .lens-context { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; margin: -16px 0 34px; padding: 14px 16px; border: 1px solid var(--rule); border-left: 4px solid var(--sky); border-radius: 9px; background: #fff; color: var(--ink-soft); font-size: .88rem; transition: border-color .2s, box-shadow .2s; }
+    .lens-context b { color: var(--ink); }
+    .lens-context .lens-badge { padding: 5px 9px; border-radius: 999px; background: var(--ice); color: #154f70; font-size: .7rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+    .lens-context .priority-badge { display: none; color: var(--red); font-size: .72rem; font-weight: 800; text-transform: uppercase; }
+    .section.is-lens-priority .lens-context { border-color: var(--salmon); border-left-color: var(--red); box-shadow: 0 10px 30px rgba(219,18,23,.08); }
+    .section.is-lens-priority .priority-badge { display: block; }
+
+    .tension-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 28px; align-items: stretch; }
+    .tension-copy { padding: 34px 0; }
+    .tension-copy h3 { margin-bottom: 14px; }
+    .tension-copy p { color: var(--ink-soft); }
+    .state-picker { background: var(--ink); color: #fff; border-radius: 14px; padding: 34px; box-shadow: var(--shadow); }
+    .state-picker .eyebrow { color: #ffaaa5; }
+    .state-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 28px; }
+    .state-button {
+      padding: 9px 13px;
+      border: 1px solid #4b555f;
+      border-radius: 3px;
+      background: transparent;
+      color: #dfe4e8;
+      cursor: pointer;
+    }
+    .state-button:hover { border-color: #fff; color: #fff; }
+    .state-button[aria-pressed="true"] { border-color: #fff; background: #fff; color: var(--ink); }
+    .state-result { display: grid; grid-template-columns: 34px 1fr; gap: 16px; align-items: start; }
+    .state-result .num { color: #ffaaa5; font-size: 1.8rem; line-height: 1; }
+    .state-result h3 { margin-bottom: 8px; color: #fff; }
+    .state-result p { margin: 0; color: #c9d0d5; }
+
+    .definition {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 52px;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .definition > div { padding: 34px; }
+    .definition > div + div { border-left: 1px solid var(--rule); }
+    .definition h3 { margin-bottom: 14px; }
+    .definition ul { margin: 0; padding-left: 19px; color: var(--ink-soft); }
+    .definition li + li { margin-top: 8px; }
+
+    .channel-layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 26px; }
+    .channel-tabs { display: flex; flex-direction: column; gap: 8px; }
+    .channel-tab {
+      min-height: 56px;
+      padding: 13px 15px;
+      border: 1px solid var(--rule);
+      border-left: 4px solid transparent;
+      border-radius: 2px;
+      background: rgba(255,255,255,.48);
+      color: var(--ink-soft);
+      text-align: left;
+      cursor: pointer;
+    }
+    .channel-tab:hover { border-color: var(--rule-dark); }
+    .channel-tab[aria-selected="true"] { border-color: var(--ink); border-left-color: var(--red); background: var(--surface); color: var(--ink); font-weight: 700; }
+    .channel-panel { min-height: 380px; padding: 38px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; box-shadow: var(--shadow); }
+    .channel-kicker { color: var(--red-dark); font-size: .8rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .channel-panel h3 { margin: 9px 0 13px; }
+    .channel-panel .description { max-width: 700px; color: var(--ink-soft); }
+    .channel-meta { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 30px; border-top: 1px solid var(--rule); }
+    .channel-meta > div { padding: 22px 22px 0 0; }
+    .channel-meta > div + div { padding-left: 22px; border-left: 1px solid var(--rule); }
+    .channel-meta dt { margin-bottom: 7px; color: var(--ink-faint); font-size: .75rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
+    .channel-meta dd { margin: 0; font-size: .94rem; }
+    .route-note { margin: 30px 0 0; padding: 17px 19px; border-left: 3px solid var(--blue); background: var(--blue-soft); color: #244753; }
+
+    .journey-wrap { padding: 38px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; box-shadow: var(--shadow); }
+    .journey-rail { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+    .journey-rail::before { content: ""; position: absolute; top: 23px; right: 6%; left: 6%; height: 1px; background: var(--rule-dark); }
+    .journey-step {
+      position: relative;
+      min-height: 105px;
+      padding: 0 8px 10px;
+      border: 0;
+      background: transparent;
+      text-align: center;
+      cursor: pointer;
+    }
+    .journey-step .dot {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 46px;
+      height: 46px;
+      margin: 0 auto 11px;
+      place-items: center;
+      border: 1px solid var(--rule-dark);
+      border-radius: 50%;
+      background: var(--surface);
+      font-weight: 700;
+    }
+    .journey-step:hover .dot { border-color: var(--red); }
+    .journey-step[aria-selected="true"] .dot { border-color: var(--red); background: var(--red); color: #fff; }
+    .journey-step .label { display: block; font-size: .85rem; font-weight: 700; }
+    .journey-detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, .55fr); gap: 36px; min-height: 190px; margin-top: 28px; padding-top: 30px; border-top: 1px solid var(--rule); }
+    .journey-detail h3 { margin-bottom: 10px; }
+    .journey-detail p { color: var(--ink-soft); }
+    .journey-detail aside { padding: 20px 22px; background: var(--surface-warm); border-left: 3px solid var(--red); }
+    .journey-detail aside strong { display: block; margin-bottom: 6px; }
+    .journey-detail aside p { margin-bottom: 0; font-size: .92rem; }
+
+    .clinical-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .clinical-card { position: relative; min-height: 245px; padding: 25px; overflow: hidden; border: 1px solid var(--rule); border-radius: 12px; background: #fff; }
+    .clinical-card::after { content: attr(data-step); position: absolute; right: 16px; bottom: -28px; color: rgba(219,18,23,.08); font-size: 7rem; font-weight: 800; line-height: 1; }
+    .clinical-icon { display: grid; width: 42px; height: 42px; margin-bottom: 26px; place-items: center; border-radius: 50%; background: var(--ice); color: var(--ocean); }
+    .clinical-icon svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .clinical-card h3 { position: relative; z-index: 1; font-size: 1.15rem; }
+    .clinical-card p { position: relative; z-index: 1; margin-bottom: 0; color: var(--ink-soft); font-size: .9rem; }
+    .clinical-boundary { display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center; margin-top: 20px; padding: 24px; border-radius: 12px; background: var(--red-dark); color: #fff; }
+    .clinical-boundary .boundary-mark { display: grid; width: 68px; height: 68px; place-items: center; border: 1px solid rgba(255,255,255,.45); border-radius: 50%; font-size: 1.5rem; font-weight: 800; }
+    .clinical-boundary strong { display: block; margin-bottom: 4px; }
+    .clinical-boundary p { margin: 0; color: rgba(255,255,255,.8); font-size: .9rem; }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 38px;
+      border: 1px solid var(--rule-dark);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .architecture div { position: relative; padding: 24px 20px; }
+    .architecture div + div { border-left: 1px solid var(--rule); }
+    .architecture b { display: block; margin-bottom: 7px; }
+    .architecture span { color: var(--ink-soft); font-size: .86rem; }
+    .architecture div:not(:last-child)::after { content: "›"; position: absolute; top: 17px; right: -7px; z-index: 2; color: var(--red); font-size: 1.7rem; }
+    .guardrail { margin-top: 24px; padding: 18px 21px; border: 1px solid var(--salmon); border-radius: 8px; background: var(--alabaster); color: var(--red-dark); }
+
+    .reporting-layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 28px; align-items: start; }
+    .report-tabs { display: flex; flex-direction: column; gap: 8px; }
+    .report-tab { display: grid; grid-template-columns: 35px 1fr; gap: 10px; align-items: center; min-height: 62px; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 9px; background: rgba(255,255,255,.58); color: var(--ink-soft); text-align: left; cursor: pointer; }
+    .report-tab span { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; background: var(--ice); color: var(--ocean); font-size: .78rem; font-weight: 800; }
+    .report-tab[aria-selected="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+    .report-tab[aria-selected="true"] span { background: var(--red); color: #fff; }
+    .report-board { overflow: hidden; border: 1px solid var(--rule); border-radius: 14px; background: #fff; box-shadow: var(--shadow); }
+    .report-copy { padding: 34px 36px 28px; }
+    .report-copy h3 { margin-bottom: 10px; }
+    .report-copy p { max-width: 760px; margin-bottom: 0; color: var(--ink-soft); }
+    .report-chart { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: end; min-height: 250px; padding: 26px 36px 34px; border-top: 1px solid var(--rule); background: linear-gradient(180deg, #fff, var(--ice)); }
+    .report-bar { display: grid; grid-template-rows: 1fr auto; gap: 12px; height: 178px; align-items: end; }
+    .report-bar i { display: block; width: 100%; min-height: 18px; border-radius: 8px 8px 3px 3px; background: var(--bar-color, var(--ocean)); transition: height .35s ease; }
+    .report-bar b { min-height: 36px; font-size: .75rem; line-height: 1.3; }
+    .report-readout { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); }
+    .report-readout div { padding: 20px 24px; background: #fff; }
+    .report-readout small { display: block; margin-bottom: 5px; color: var(--ink-faint); font-weight: 700; text-transform: uppercase; }
+    .report-readout strong { display: block; line-height: 1.4; }
+
+    .role-layout { display: grid; grid-template-columns: .75fr 1.25fr; gap: 30px; align-items: start; }
+    .role-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .role-tab {
+      min-height: 82px;
+      padding: 13px;
+      border: 1px solid var(--rule);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+    .role-tab small { display: block; margin-top: 4px; color: var(--ink-faint); }
+    .role-tab[aria-selected="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+    .role-tab[aria-selected="true"] small { color: #c8cfd4; }
+    .role-panel { padding: 38px; background: var(--surface); border-top: 4px solid var(--red); border-radius: 0 0 12px 12px; box-shadow: var(--shadow); }
+    .role-panel h3 { margin-bottom: 11px; }
+    .role-question { margin: 26px 0 0; padding-top: 22px; border-top: 1px solid var(--rule); color: var(--ink-soft); }
+    .role-question strong { color: var(--ink); }
+
+    .proof-intro { display: grid; grid-template-columns: .85fr 1.15fr; gap: 40px; margin-bottom: 30px; }
+    .case-tabs { display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start; }
+    .case-tab { padding: 9px 13px; border: 1px solid var(--rule-dark); background: transparent; cursor: pointer; }
+    .case-tab[aria-selected="true"] { border-color: var(--red); background: var(--red); color: #fff; }
+    .case-panel { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .55fr); gap: 34px; overflow: hidden; background: var(--ink); color: #fff; padding: 38px; border-radius: 14px; box-shadow: var(--shadow); }
+    .case-panel .case-summary { max-width: 780px; color: #ccd3d8; }
+    .metric-row { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 34px; border-top: 1px solid #45505a; }
+    .metric { padding: 25px 22px 0 0; }
+    .metric + .metric { padding-left: 22px; border-left: 1px solid #45505a; }
+    .metric strong { display: block; color: #fff; font-size: clamp(1.65rem, 4vw, 2.8rem); font-weight: 700; line-height: 1; }
+    .metric span { display: block; margin-top: 9px; color: #aeb8c0; font-size: .82rem; }
+    .case-visual { position: relative; min-height: 360px; overflow: hidden; border-radius: 10px; background: #ececec; }
+    .case-visual img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .2s; }
+    .case-visual figcaption { position: absolute; right: 12px; bottom: 12px; left: 12px; padding: 9px 11px; border-radius: 7px; background: rgba(22,22,22,.8); color: #fff; font-size: .72rem; }
+    .proof-note { margin: 14px 0 0; color: var(--ink-faint); font-size: .8rem; }
+
+    .builder { display: grid; grid-template-columns: minmax(280px, .75fr) minmax(0, 1.25fr); border: 1px solid var(--rule); background: var(--surface); box-shadow: var(--shadow); }
+    .builder-controls { padding: 34px; border-right: 1px solid var(--rule); }
+    .field + .field { margin-top: 22px; }
+    .field label { display: block; margin-bottom: 7px; color: var(--ink-soft); font-size: .86rem; font-weight: 700; }
+    .field select { width: 100%; min-height: 48px; padding: 9px 38px 9px 12px; border: 1px solid var(--rule-dark); border-radius: 2px; background: #fff; color: var(--ink); }
+    .builder-output { padding: 34px; }
+    .builder-output h3 { margin: 8px 0 13px; }
+    .builder-output .path { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0; }
+    .builder-output .path span { padding: 8px 11px; background: var(--red-soft); color: #7e231f; font-size: .84rem; font-weight: 700; }
+    .builder-output dl { display: grid; grid-template-columns: 130px 1fr; gap: 12px 18px; margin-bottom: 0; padding-top: 24px; border-top: 1px solid var(--rule); }
+    .builder-output dt { color: var(--ink-faint); font-size: .78rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+    .builder-output dd { margin: 0; }
+
+    .faq-list { max-width: 900px; margin-top: 36px; border-top: 1px solid var(--rule-dark); }
+    details { border-bottom: 1px solid var(--rule-dark); }
+    summary { padding: 20px 4px; font-size: 1.12rem; font-weight: 700; cursor: pointer; }
+    details p { max-width: 760px; padding: 0 4px 20px; color: var(--ink-soft); }
+    details ul { max-width: 760px; margin-top: 0; padding-bottom: 20px; color: var(--ink-soft); }
+
+    .resource-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 34px; }
+    .resource-link { min-height: 150px; padding: 22px; border: 1px solid var(--rule); background: rgba(255,255,255,.5); color: var(--ink); text-decoration: none; }
+    .resource-link:hover { border-color: var(--ink); background: var(--surface); color: var(--ink); }
+    .resource-link small { display: block; margin-bottom: 20px; color: var(--red-dark); font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+    .resource-link strong { font-size: 1.16rem; font-weight: 700; }
+    .resource-link span { display: block; margin-top: 8px; color: var(--ink-soft); font-size: .83rem; }
+
+    footer { padding: 44px 0 70px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 30px; padding-top: 28px; border-top: 1px solid var(--rule-dark); color: var(--ink-faint); font-size: .82rem; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .section-head, .tension-grid, .role-layout, .proof-intro, .builder, .case-panel { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 360px; }
+      .section-head { gap: 18px; }
+      .channel-layout { grid-template-columns: 1fr; }
+      .channel-tabs { flex-direction: row; overflow-x: auto; }
+      .channel-tab { flex: 0 0 190px; }
+      .journey-rail { grid-template-columns: repeat(3, 1fr); row-gap: 18px; }
+      .journey-rail::before { display: none; }
+      .journey-detail { grid-template-columns: 1fr; }
+      .clinical-grid { grid-template-columns: 1fr 1fr; }
+      .architecture { grid-template-columns: 1fr; }
+      .architecture div + div { border-left: 0; border-top: 1px solid var(--rule); }
+      .architecture div:not(:last-child)::after { top: auto; right: 22px; bottom: -17px; transform: rotate(90deg); }
+      .metric-row { grid-template-columns: 1fr 1fr; }
+      .metric:nth-child(3) { padding-left: 0; border-left: 0; }
+      .reporting-layout { grid-template-columns: 1fr; }
+      .report-tabs { flex-direction: row; overflow-x: auto; }
+      .report-tab { flex: 0 0 200px; }
+      .builder-controls { border-right: 0; border-bottom: 1px solid var(--rule); }
+      .resource-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 28px, 1160px); }
+      .section { padding: 68px 0; }
+      .hero { padding: 58px 0 52px; }
+      .brand span { display: none; }
+      .brand img { width: 54px; }
+      .topnav { gap: 14px; }
+      .definition { grid-template-columns: 1fr; }
+      .definition > div + div { border-left: 0; border-top: 1px solid var(--rule); }
+      .lens-dashboard, .clinical-grid { grid-template-columns: 1fr; }
+      .lens-context { grid-template-columns: 1fr; }
+      .lens-context .priority-badge { justify-self: start; }
+      .state-picker, .channel-panel, .journey-wrap, .role-panel, .case-panel, .builder-controls, .builder-output { padding: 25px; }
+      .channel-meta { grid-template-columns: 1fr; }
+      .channel-meta > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
+      .channel-meta > div { padding: 16px 0; }
+      .journey-rail { grid-template-columns: 1fr 1fr; }
+      .clinical-boundary { grid-template-columns: 1fr; }
+      .report-chart { grid-template-columns: 1fr 1fr; min-height: 370px; }
+      .report-readout { grid-template-columns: 1fr; }
+      .role-tabs { grid-template-columns: 1fr; }
+      .metric-row { grid-template-columns: 1fr; }
+      .metric + .metric { padding-left: 0; border-left: 0; border-top: 1px solid #45505a; }
+      .metric { padding: 20px 0; }
+      .builder-output dl { grid-template-columns: 1fr; gap: 3px; }
+      .builder-output dd + dt { margin-top: 12px; }
+      .resource-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    }
+
+    @media print {
+      .topbar, .lens-row, .channel-tabs, .journey-rail, .role-tabs, .case-tabs, .report-tabs, .builder-controls { display: none !important; }
+      body { background: #fff; }
+      .section { padding: 34px 0; break-inside: avoid; }
+      .hero { padding-top: 30px; }
+      .channel-layout, .role-layout, .reporting-layout, .builder { display: block; }
+      .channel-panel, .journey-wrap, .role-panel, .case-panel, .builder-output { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top" aria-label="Unlock HRA 101 home"><img src="assets/unlock-red.png" alt="Unlock"><span>HRA 101</span></a>
+      <nav class="topnav" aria-label="Page sections">
+        <a href="#why">Why</a>
+        <a href="#reach">Reach</a>
+        <a href="#journey">Journey</a>
+        <a href="#clinical">Clinical</a>
+        <a href="#operations">Operations</a>
+        <a href="#reporting">Reporting</a>
+        <a href="#value">Value</a>
+        <a href="#proof">Proof</a>
+        <a href="#apply">Apply it</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="shell">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">Health Risk Assessments, understood in context</p>
+            <h1>From initial interest to the <span>right next step</span></h1>
+            <p class="lede measure">An HRA meets consumers before they are ready to schedule, helps them make sense of a health concern, and gives the health system a measurable way to continue the relationship.</p>
+          </div>
+          <div class="hero-visual" role="img" aria-label="Blue sky, an Unlock brand image representing possibility">
+            <aside class="hero-side">
+              <strong>The assessment is the beginning</strong>
+              <p>The connected journey around it—entry point, clinical framework, next step, follow-up, and reporting—creates the value.</p>
+            </aside>
+          </div>
+        </div>
+        <div class="hero-rule"></div>
+        <div class="lens-row" aria-label="Choose a reading lens">
+          <span class="lens-label">I am here to</span>
+          <button class="chip lens-button" type="button" data-lens="learn" aria-pressed="true">Learn the basics</button>
+          <button class="chip lens-button" type="button" data-lens="talk" aria-pressed="false">Guide a client conversation</button>
+          <button class="chip lens-button" type="button" data-lens="plan" aria-pressed="false">Plan an activation</button>
+        </div>
+        <p class="lens-note" id="lens-note" aria-live="polite">Follow the consumer from a moment of uncertainty through a personalized next step.</p>
+        <div class="lens-dashboard" id="lens-dashboard" aria-live="polite">
+          <div class="lens-card"><small>Your path</small><strong id="lens-path-title">Understand the full story</strong><p id="lens-path-copy">Move from the consumer need to the experience, clinical foundation, activation, and measurement.</p></div>
+          <div class="lens-card"><small>Start with</small><strong id="lens-start-title">Why an HRA exists</strong><p id="lens-start-copy">Begin with the gap between health interest and readiness to schedule.</p></div>
+          <div class="lens-card"><small>Watch for</small><strong id="lens-watch-title">Connection, not just completion</strong><p id="lens-watch-copy">Look for how the result becomes an appropriate action and a measurable relationship.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">01 · The gap</p>
+            <h2>Interest does not always mean readiness</h2>
+          </div>
+          <p class="muted">Many digital journeys ask a consumer to schedule before that person understands the concern, trusts the next step, or knows which kind of care fits.</p>
+        </div>
+        <div class="lens-context" data-lens-section="why"><span class="lens-badge">Learn</span><span><b>What to understand:</b> HRAs create a useful step between passive interest and appointment readiness.</span><span class="priority-badge">Recommended stop</span></div>
+
+        <div class="tension-grid">
+          <div class="tension-copy">
+            <h3>The conversion gap</h3>
+            <p>A campaign earns attention. A landing page explains a service. Then the experience often jumps directly to a phone number or appointment request.</p>
+            <p>That jump loses people who need education or decision support before they are ready to act.</p>
+          </div>
+          <div class="state-picker">
+            <p class="eyebrow">Explore a consumer state</p>
+            <div class="state-buttons" aria-label="Consumer states">
+              <button class="state-button" type="button" data-state="not-ready" aria-pressed="true">Not ready</button>
+              <button class="state-button" type="button" data-state="researching" aria-pressed="false">Researching</button>
+              <button class="state-button" type="button" data-state="where" aria-pressed="false">Unsure where to start</button>
+              <button class="state-button" type="button" data-state="afraid" aria-pressed="false">Concerned</button>
+              <button class="state-button" type="button" data-state="symptoms" aria-pressed="false">Doesn't understand symptoms</button>
+            </div>
+            <div class="state-result" aria-live="polite">
+              <div class="num">↳</div>
+              <div>
+                <h3 id="state-title">A smaller first step</h3>
+                <p id="state-copy">The HRA offers a useful action that requires less commitment than scheduling: answer a few questions and receive relevant guidance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="definition">
+          <div>
+            <p class="eyebrow">What it is</p>
+            <h3>A guided health assessment</h3>
+            <p class="muted">A short, mobile-first experience that uses clinically reviewed questions to provide personalized education and an appropriate next step.</p>
+          </div>
+          <div>
+            <p class="eyebrow">What it is not</p>
+            <h3>A quiz that ends with a score</h3>
+            <ul>
+              <li>It does not diagnose a condition.</li>
+              <li>It should not end when the answers are collected.</li>
+              <li>It does not replace the health system's care or clinical judgment.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reach">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">02 · Reaching the right person</p>
+            <h2>The channel shapes the entry experience</h2>
+          </div>
+          <p class="muted">The HRA works best when the message, audience intent, and destination match. Broad interest and specific intent require different doors.</p>
+        </div>
+        <div class="lens-context" data-lens-section="reach"><span class="lens-badge">Learn</span><span><b>What to understand:</b> An HRA is not one destination; the entry path should match the consumer's level of intent.</span><span class="priority-badge">Recommended stop</span></div>
+
+        <div class="channel-layout">
+          <div class="channel-tabs" role="tablist" aria-label="Acquisition channels">
+            <button class="channel-tab" type="button" role="tab" aria-selected="true" aria-controls="channel-panel" data-channel="search">Paid search</button>
+            <button class="channel-tab" type="button" role="tab" aria-selected="false" aria-controls="channel-panel" data-channel="social">Paid social</button>
+            <button class="channel-tab" type="button" role="tab" aria-selected="false" aria-controls="channel-panel" data-channel="website">Organic website</button>
+            <button class="channel-tab" type="button" role="tab" aria-selected="false" aria-controls="channel-panel" data-channel="email">Email and CRM</button>
+          </div>
+          <article class="channel-panel" id="channel-panel" role="tabpanel" aria-live="polite">
+            <p class="channel-kicker" id="channel-kicker">High intent</p>
+            <h3 id="channel-title">Capture a specific care question</h3>
+            <p class="description" id="channel-copy">Search reaches people who are actively researching symptoms, screening, treatment, or a provider. Strong message matching can lead them directly to the assessment that fits their question.</p>
+            <dl class="channel-meta">
+              <div><dt>Best entry</dt><dd id="channel-entry">Condition-specific landing page or direct HRA</dd></div>
+              <div><dt>Example prompt</dt><dd id="channel-prompt">“How healthy is your heart?”</dd></div>
+              <div><dt>Primary job</dt><dd id="channel-job">Turn active research into a useful next step</dd></div>
+            </dl>
+            <p class="route-note" id="channel-route"><strong>Routing principle:</strong> When the concern is clear, remove extra choices and lead directly to the relevant HRA.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="journey">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">03 · The consumer journey</p>
+            <h2>The experience continues after “Start”</h2>
+          </div>
+          <p class="muted">Each stage answers a different question for the consumer and creates a different responsibility for the health system.</p>
+        </div>
+        <div class="lens-context" data-lens-section="journey"><span class="lens-badge">Learn</span><span><b>What to understand:</b> Value accumulates across the entire journey, not inside the questionnaire alone.</span><span class="priority-badge">Recommended stop</span></div>
+
+        <div class="journey-wrap">
+          <div class="journey-rail" role="tablist" aria-label="HRA journey stages">
+            <button class="journey-step" type="button" role="tab" aria-selected="true" aria-controls="journey-detail" data-step="discover"><span class="dot">1</span><span class="label">Discover</span></button>
+            <button class="journey-step" type="button" role="tab" aria-selected="false" aria-controls="journey-detail" data-step="choose"><span class="dot">2</span><span class="label">Choose</span></button>
+            <button class="journey-step" type="button" role="tab" aria-selected="false" aria-controls="journey-detail" data-step="assess"><span class="dot">3</span><span class="label">Assess</span></button>
+            <button class="journey-step" type="button" role="tab" aria-selected="false" aria-controls="journey-detail" data-step="understand"><span class="dot">4</span><span class="label">Understand</span></button>
+            <button class="journey-step" type="button" role="tab" aria-selected="false" aria-controls="journey-detail" data-step="act"><span class="dot">5</span><span class="label">Act</span></button>
+            <button class="journey-step" type="button" role="tab" aria-selected="false" aria-controls="journey-detail" data-step="continue"><span class="dot">6</span><span class="label">Continue</span></button>
+          </div>
+          <div class="journey-detail" id="journey-detail" role="tabpanel" aria-live="polite">
+            <div>
+              <p class="eyebrow" id="journey-kicker">Stage 1</p>
+              <h3 id="journey-title">A relevant message earns attention</h3>
+              <p id="journey-copy">The consumer encounters an HRA through paid media, a health system website, email, social content, direct mail, or another trusted touchpoint.</p>
+            </div>
+            <aside>
+              <strong id="journey-owner">Health system responsibility</strong>
+              <p id="journey-aside">Connect the message to a real growth priority and a credible consumer need.</p>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="clinical">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">04 · Clinical framework</p>
+            <h2>Every HRA is grounded in a clinical framework</h2>
+          </div>
+          <p class="muted">The experience is designed to help a consumer understand an appropriate next step before diagnosis—not to make the diagnosis itself.</p>
+        </div>
+        <div class="lens-context" data-lens-section="clinical"><span class="lens-badge">Learn</span><span><b>What to understand:</b> Clinical rigor shapes the questions, result logic, boundaries, and next-step guidance.</span><span class="priority-badge">Recommended stop</span></div>
+
+        <div class="clinical-grid" aria-label="Clinical framework stages">
+          <article class="clinical-card" data-step="1">
+            <span class="clinical-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2.5Z"/><path d="M8 7h6M8 11h6"/></svg></span>
+            <h3>Define the intended use</h3>
+            <p>Clarify the population, health topic, consumer need, and care decision the experience is meant to support.</p>
+          </article>
+          <article class="clinical-card" data-step="2">
+            <span class="clinical-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11l2 2 4-5"/><circle cx="12" cy="12" r="9"/></svg></span>
+            <h3>Use clinically reviewed questions</h3>
+            <p>Questions and answer choices are structured to capture relevant context clearly and consistently.</p>
+          </article>
+          <article class="clinical-card" data-step="3">
+            <span class="clinical-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v5H5zM5 15h6v5H5zM15 15h4v5h-4zM12 9v3M8 12h9M8 12v3M17 12v3"/></svg></span>
+            <h3>Apply pre-diagnostic logic</h3>
+            <p>Responses shape education and recommendation pathways without presenting the result as a clinical diagnosis.</p>
+          </article>
+          <article class="clinical-card" data-step="4">
+            <span class="clinical-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0-9-9"/><path d="M3 16v5h5M8 12h8M12 8l4 4-4 4"/></svg></span>
+            <h3>Guide the next step</h3>
+            <p>The result can point toward education, screening, a provider, a program, or urgent support based on the framework.</p>
+          </article>
+        </div>
+
+        <div class="clinical-boundary">
+          <span class="boundary-mark" aria-hidden="true">!</span>
+          <div><strong>The clinical boundary</strong><p>An HRA is pre-diagnostic and does not replace evaluation by a qualified clinician. The ultimate next step for an individual's care requires clinical judgment, especially when symptoms are new, severe, or urgent.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="operations">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">05 · Behind the experience</p>
+            <h2>The connected system creates the value</h2>
+          </div>
+          <p class="muted">The assessment is one part of a larger operating model that connects acquisition, personalization, follow-up, and measurement.</p>
+        </div>
+        <div class="lens-context" data-lens-section="operations"><span class="lens-badge">Learn</span><span><b>What to understand:</b> The operating model turns a result into a usable pathway, owned follow-up, and continuous improvement.</span><span class="priority-badge">Recommended stop</span></div>
+
+        <div class="architecture" aria-label="Connected HRA operating model">
+          <div><b>Acquire</b><span>Paid, owned, and organic channels create relevant entry points.</span></div>
+          <div><b>Understand</b><span>Questions identify needs, readiness, and the appropriate result logic.</span></div>
+          <div><b>Activate</b><span>Personalized CTAs connect each result to the next best action.</span></div>
+          <div><b>Continue</b><span>Consented data supports nurture, CRM routing, and operational follow-up.</span></div>
+          <div><b>Improve</b><span>Source, completion, CTA, and downstream activity inform optimization.</span></div>
+        </div>
+        <div class="guardrail"><strong>Guardrail:</strong> Keep sensitive health answers and result labels out of advertising platforms and generic analytics. Use approved, privacy-safe events and consented follow-up.</div>
+      </div>
+    </section>
+
+    <section class="section" id="reporting">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">06 · Reporting</p>
+            <h2>Reporting closes the loop</h2>
+          </div>
+          <p class="muted">A mature HRA program moves beyond starts and completions to connect source, engagement, action, access, and downstream outcomes.</p>
+        </div>
+        <div class="lens-context" data-lens-section="reporting"><span class="lens-badge">Learn</span><span><b>What to understand:</b> Each reporting layer answers a different question, from “Did we earn attention?” to “Did that engagement become care?”</span><span class="priority-badge">Recommended stop</span></div>
+
+        <div class="reporting-layout">
+          <div class="report-tabs" role="tablist" aria-label="Reporting layers">
+            <button class="report-tab" type="button" role="tab" aria-selected="true" aria-controls="report-board" data-report="source"><span>01</span>Source and reach</button>
+            <button class="report-tab" type="button" role="tab" aria-selected="false" aria-controls="report-board" data-report="engage"><span>02</span>Assessment engagement</button>
+            <button class="report-tab" type="button" role="tab" aria-selected="false" aria-controls="report-board" data-report="action"><span>03</span>Next-step action</button>
+            <button class="report-tab" type="button" role="tab" aria-selected="false" aria-controls="report-board" data-report="access"><span>04</span>Access and follow-up</button>
+            <button class="report-tab" type="button" role="tab" aria-selected="false" aria-controls="report-board" data-report="outcomes"><span>05</span>Patients and ROI</button>
+          </div>
+
+          <article class="report-board" id="report-board" role="tabpanel" aria-live="polite">
+            <div class="report-copy">
+              <p class="eyebrow" id="report-kicker">Layer 1 · Acquisition</p>
+              <h3 id="report-title">Understand what created the visit</h3>
+              <p id="report-copy">Connect campaign, channel, placement, and audience context to the HRA session so the team can see which entry points attract relevant traffic.</p>
+            </div>
+            <div class="report-chart" id="report-chart" aria-label="Illustrative reporting metrics"></div>
+            <div class="report-readout">
+              <div><small>Question answered</small><strong id="report-question">Which channels and messages are earning attention?</strong></div>
+              <div><small>Decision enabled</small><strong id="report-decision">Shift investment toward the audiences and entry points that create qualified engagement.</strong></div>
+            </div>
+          </article>
+        </div>
+        <div class="guardrail"><strong>Measurement guardrail:</strong> Use approved, privacy-safe events, consented data, and agreed attribution rules. Sensitive answers and clinical result labels should not flow into advertising platforms or generic analytics.</div>
+      </div>
+    </section>
+
+    <section class="section" id="value">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">07 · Value by role</p>
+            <h2>The same HRA supports different priorities</h2>
+          </div>
+          <p class="muted">A useful HRA conversation begins with the outcome the stakeholder owns, then connects the product to that outcome.</p>
+        </div>
+        <div class="lens-context" data-lens-section="value"><span class="lens-badge">Learn</span><span><b>What to understand:</b> Stakeholders see different value in the same connected journey; lead with the outcome they own.</span><span class="priority-badge">Recommended stop</span></div>
+
+        <div class="role-layout">
+          <div class="role-tabs" role="tablist" aria-label="Stakeholder roles">
+            <button class="role-tab" type="button" role="tab" aria-selected="true" aria-controls="role-panel" data-role="marketing">Marketing<small>Qualified demand</small></button>
+            <button class="role-tab" type="button" role="tab" aria-selected="false" aria-controls="role-panel" data-role="digital">Digital<small>Website conversion</small></button>
+            <button class="role-tab" type="button" role="tab" aria-selected="false" aria-controls="role-panel" data-role="population">Population health<small>Earlier screening</small></button>
+            <button class="role-tab" type="button" role="tab" aria-selected="false" aria-controls="role-panel" data-role="service">Service line<small>Patient volume</small></button>
+            <button class="role-tab" type="button" role="tab" aria-selected="false" aria-controls="role-panel" data-role="crm">CRM and experience<small>Personalized follow-up</small></button>
+            <button class="role-tab" type="button" role="tab" aria-selected="false" aria-controls="role-panel" data-role="clinical">Clinical leadership<small>Appropriate action</small></button>
+          </div>
+          <article class="role-panel" id="role-panel" role="tabpanel" aria-live="polite">
+            <p class="eyebrow" id="role-kicker">For marketing</p>
+            <h3 id="role-title">Turn anonymous traffic into qualified demand</h3>
+            <p class="muted" id="role-copy">An HRA gives consumers a meaningful reason to engage while capturing consented information that can support relevant follow-up and better media decisions.</p>
+            <p class="role-question"><strong>Start the conversation with:</strong> <span id="role-question">Where are campaigns generating attention without enough qualified action?</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proof">
+      <div class="shell">
+        <div class="proof-intro">
+          <div>
+            <p class="eyebrow">08 · Proof in practice</p>
+            <h2>Connected journeys produce measurable outcomes</h2>
+          </div>
+          <div>
+            <p class="muted">The examples below show different ways HRAs can support integrated campaigns. The important pattern is the connection between audience strategy, the HRA, follow-up, and downstream measurement.</p>
+            <div class="case-tabs" role="tablist" aria-label="Case studies">
+              <button class="case-tab" type="button" role="tab" aria-selected="true" aria-controls="case-panel" data-case="heart-month">Heart Month</button>
+              <button class="case-tab" type="button" role="tab" aria-selected="false" aria-controls="case-panel" data-case="christus">CHRISTUS Health</button>
+              <button class="case-tab" type="button" role="tab" aria-selected="false" aria-controls="case-panel" data-case="umiami">UHealth</button>
+              <button class="case-tab" type="button" role="tab" aria-selected="false" aria-controls="case-panel" data-case="multi">Multi-HRA system</button>
+            </div>
+          </div>
+        </div>
+        <div class="lens-context" data-lens-section="proof"><span class="lens-badge">Learn</span><span><b>What to understand:</b> Proof is strongest when it connects an HRA to operational follow-up and downstream outcomes.</span><span class="priority-badge">Recommended stop</span></div>
+
+        <article class="case-panel" id="case-panel" role="tabpanel" aria-live="polite">
+          <div>
+            <p class="eyebrow" id="case-kicker">Integrated marketing</p>
+            <h3 id="case-title">Heart Month campaign connected awareness to scheduled screenings</h3>
+            <p class="case-summary" id="case-summary">Audience research, distinctive creative, an HRA, and coordinated promotion moved consumers from a heart-health message into a measurable screening journey.</p>
+            <div class="metric-row" id="case-metrics"></div>
+          </div>
+          <figure class="case-visual">
+            <img id="case-image" src="assets/unlock-sky.jpg" alt="Unlock blue sky brand image">
+            <figcaption id="case-caption">Awareness became a measurable screening path</figcaption>
+          </figure>
+        </article>
+        <p class="proof-note">Proof points are drawn from the provided case-study and internal reference materials. Confirm current approval, definitions, timeframe, and attribution before external publication.</p>
+      </div>
+    </section>
+
+    <section class="section" id="apply">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">09 · Apply the model</p>
+            <h2>Start with the growth problem</h2>
+          </div>
+          <p class="muted">A strong strategy connects a priority, a current gap, the right entry experience, and a measurable next action.</p>
+        </div>
+        <div class="lens-context" data-lens-section="apply"><span class="lens-badge">Learn</span><span><b>What to understand:</b> A practical recommendation starts with the growth problem, not the product feature list.</span><span class="priority-badge">Recommended stop</span></div>
+
+        <div class="builder">
+          <div class="builder-controls">
+            <div class="field">
+              <label for="priority-select">What is the health system trying to improve?</label>
+              <select id="priority-select">
+                <option value="volume">Grow service-line patient volume</option>
+                <option value="screening">Increase preventive screenings</option>
+                <option value="conversion">Improve campaign conversion</option>
+                <option value="experience">Create a better digital experience</option>
+                <option value="data">Capture useful first-party data</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="gap-select">Where does the current journey break down?</label>
+              <select id="gap-select">
+                <option value="unready">Visitors are not ready to schedule</option>
+                <option value="unknown">Consumers do not know where to start</option>
+                <option value="traffic">Campaign traffic is not converting</option>
+                <option value="followup">Follow-up is generic or inconsistent</option>
+                <option value="measurement">Downstream impact is unclear</option>
+              </select>
+            </div>
+          </div>
+          <article class="builder-output" aria-live="polite">
+            <p class="eyebrow">Recommended conversation</p>
+            <h3 id="builder-title">Create a lower-friction path into a priority service line</h3>
+            <p class="muted" id="builder-copy">Use a relevant HRA to engage people who show interest but are not yet ready to book, then connect results to a service-line CTA and follow-up journey.</p>
+            <div class="path" id="builder-path" aria-label="Recommended journey"></div>
+            <dl>
+              <dt>Lead with</dt><dd id="builder-lead">The gap between traffic and appointment readiness</dd>
+              <dt>Measure</dt><dd id="builder-measure">HRA completion, qualified CTA action, appointment activity, and downstream patient volume</dd>
+            </dl>
+          </article>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>How is an HRA different from a quiz?</summary>
+            <p>A quiz usually collects answers and returns a score or generic result. An HRA connects clinically guided questions to personalized education, an appropriate CTA, consented follow-up, and measurement.</p>
+          </details>
+          <details>
+            <summary>Does an HRA replace a landing page?</summary>
+            <p>No. A landing page builds context and trust. The HRA adds an interactive step that helps the consumer understand what to do next. Specific campaigns may link directly to an HRA, while broader campaigns may use a landing or selection page first.</p>
+          </details>
+          <details>
+            <summary>Does every HRA produce a risk score?</summary>
+            <p>No. Experiences vary. Some use risk bands, while others return screening guidance or another recommended next step. Universal HRA language should focus on clinically guided personalization rather than promising a numerical score.</p>
+          </details>
+          <details>
+            <summary>What determines whether an HRA performs?</summary>
+            <ul>
+              <li>A clear service-line goal and defined target audience</li>
+              <li>Strong message matching from channel to assessment</li>
+              <li>Useful, verified CTAs and clear operational ownership</li>
+              <li>Consented nurture and appropriate CRM routing</li>
+              <li>Measurement beyond starts and completions</li>
+              <li>Ongoing review and optimization after launch</li>
+            </ul>
+          </details>
+        </div>
+
+        <div class="resource-grid" aria-label="Live examples">
+          <a class="resource-link" href="https://national-health.unlockhealth.com/heart-hra-landing-page/" target="_blank" rel="noopener noreferrer"><small>Paid search</small><strong>Heart landing page</strong><span>A specific concern leads to a focused assessment path.</span></a>
+          <a class="resource-link" href="https://go.unlockhealthnow.com/hra-sample-site-home/" target="_blank" rel="noopener noreferrer"><small>Organic website</small><strong>Sample health-system homepage</strong><span>HRAs appear within a broader digital ecosystem.</span></a>
+          <a class="resource-link" href="https://hra-demo.unlockhealthnow.com/v3/8cd653f6-d707-4e1c-8bd0-8af7e3c5f2d5?fakedata=true" target="_blank" rel="noopener noreferrer"><small>Selection page</small><strong>Women's Health</strong><span>Broad interest leads to a choice of relevant assessments.</span></a>
+          <a class="resource-link" href="https://hra-demo.unlockhealthnow.com/v3/485bcde3-2b5d-46a0-ad91-a752d8764fec?fakedata=true" target="_blank" rel="noopener noreferrer"><small>Direct HRA</small><strong>Breast Cancer</strong><span>A clear consumer promise introduces one assessment.</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span>HRA 101 · Working prototype · September 2026</span>
+      <span>For internal review. Validate product and proof-point language before external use.</span>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const LENSES = {
+      learn: {
+        label: "Learn",
+        note: "Follow the consumer from a moment of uncertainty through a personalized next step.",
+        pathTitle: "Understand the full story",
+        pathCopy: "Move from the consumer need to the experience, clinical foundation, activation, and measurement.",
+        startTitle: "Why an HRA exists",
+        startCopy: "Begin with the gap between health interest and readiness to schedule.",
+        watchTitle: "Connection, not just completion",
+        watchCopy: "Look for how the result becomes an appropriate action and a measurable relationship.",
+        priorities: ["why", "journey", "clinical", "reporting"],
+        sections: {
+          why: ["What to understand", "HRAs create a useful step between passive interest and appointment readiness."],
+          reach: ["What to understand", "An HRA is not one destination; the entry path should match the consumer's level of intent."],
+          journey: ["What to understand", "Value accumulates across the entire journey, not inside the questionnaire alone."],
+          clinical: ["What to understand", "Clinical rigor shapes the questions, result logic, boundaries, and next-step guidance."],
+          operations: ["What to understand", "The operating model turns a result into a usable pathway, owned follow-up, and continuous improvement."],
+          reporting: ["What to understand", "Each reporting layer answers a different question, from attention to downstream care."],
+          value: ["What to understand", "Stakeholders see different value in the same connected journey; lead with the outcome they own."],
+          proof: ["What to understand", "Proof is strongest when it connects an HRA to operational follow-up and downstream outcomes."],
+          apply: ["What to understand", "A practical recommendation starts with the growth problem, not a product feature list."]
+        }
+      },
+      talk: {
+        label: "Conversation",
+        note: "Use each section to connect a stakeholder's growth problem to the part of the HRA journey that solves it.",
+        pathTitle: "Build the case in three moves",
+        pathCopy: "Name the consumer gap, connect it to the stakeholder's priority, then prove the downstream path.",
+        startTitle: "The client's friction",
+        startCopy: "Ask where attention, access, or follow-up breaks down today.",
+        watchTitle: "Outcomes over features",
+        watchCopy: "Translate every capability into the decision or result it enables.",
+        priorities: ["why", "value", "proof", "apply"],
+        sections: {
+          why: ["Conversation move", "Ask: Where are consumers showing interest but stopping before they reach care?"],
+          reach: ["Conversation move", "Ask which channels already create attention and whether the current destination matches that intent."],
+          journey: ["Conversation move", "Walk the client through one consumer story, then name the handoff the health system must own."],
+          clinical: ["Trust point", "Clarify that the HRA is clinically guided, pre-diagnostic, and bounded by clinical judgment."],
+          operations: ["Conversation move", "Shift from the tool to the operating model: who owns the CTA, follow-up, routing, and optimization?"],
+          reporting: ["Proof point", "Define success beyond completion: action, access, patients, and ROI when attribution supports it."],
+          value: ["Conversation move", "Select the stakeholder role below and lead with the outcome that person owns."],
+          proof: ["Proof point", "Use CHRISTUS for integrated activation and UHealth for downstream reporting and ROI."],
+          apply: ["Close the conversation", "Turn the client's priority and current gap into a concrete HRA pathway and measurement plan."]
+        }
+      },
+      plan: {
+        label: "Activation",
+        note: "Look for the decisions behind the experience: audience, entry point, clinical logic, CTA, routing, ownership, and measurement.",
+        pathTitle: "Turn the story into a workplan",
+        pathCopy: "Make every handoff explicit, from acquisition through clinical review and downstream reporting.",
+        startTitle: "Goal, audience, capacity",
+        startCopy: "Confirm the business priority and whether the service line can support the demand you create.",
+        watchTitle: "The handoffs",
+        watchCopy: "The highest-risk gaps sit between teams, systems, CTAs, and follow-up owners.",
+        priorities: ["reach", "clinical", "operations", "reporting", "apply"],
+        sections: {
+          why: ["Planning decision", "Define the specific behavior or care-access gap the HRA should address."],
+          reach: ["Planning decision", "Map audience intent by channel and choose direct HRA, landing page, hub, or selection page."],
+          journey: ["Planning decision", "Document content, UX, CTA, and owner for every stage before launch."],
+          clinical: ["Planning decision", "Confirm intended use, clinical review, escalation language, and the role of clinical judgment."],
+          operations: ["Planning decision", "Assign CRM routing, contact-center workflow, consent, service-line capacity, and optimization owners."],
+          reporting: ["Planning decision", "Agree on events, data joins, attribution, reporting cadence, and the business decision each metric supports."],
+          value: ["Planning decision", "Identify the executive sponsor and every operational team whose outcome depends on the launch."],
+          proof: ["Planning decision", "Use comparable case studies to set hypotheses—not guaranteed benchmarks."],
+          apply: ["Planning decision", "Use the builder to create the first activation brief, then validate dependencies with owners."]
+        }
+      }
+    };
+
+    const STATES = {
+      "not-ready": { title: "A smaller first step", copy: "The HRA offers a useful action that requires less commitment than scheduling: answer a few questions and receive relevant guidance." },
+      researching: { title: "Clarity while exploring", copy: "The HRA turns broad research into information shaped by the consumer's own answers and points toward a relevant care option." },
+      where: { title: "Guided decision support", copy: "A selection page or focused assessment helps the consumer choose an appropriate starting point without asking them to navigate departments alone." },
+      afraid: { title: "Private, supportive education", copy: "A short assessment lets the consumer engage at their own pace, learn what may matter, and see a clear next step without fear-based language." },
+      symptoms: { title: "Context without diagnosis", copy: "The experience helps the consumer organize symptoms and risk factors, then recommends education or care without presenting the HRA as a diagnosis." }
+    };
+
+    const CHANNELS = {
+      search: {
+        kicker: "High intent",
+        title: "Capture a specific care question",
+        copy: "Search reaches people who are actively researching symptoms, screening, treatment, or a provider. Strong message matching can lead them directly to the assessment that fits their question.",
+        entry: "Condition-specific landing page or direct HRA",
+        prompt: "“How healthy is your heart?”",
+        job: "Turn active research into a useful next step",
+        route: "When the concern is clear, remove extra choices and lead directly to the relevant HRA."
+      },
+      social: {
+        kicker: "Awareness and consideration",
+        title: "Engage before active searching begins",
+        copy: "Paid social reaches people who may recognize a health concern but have not started looking for care. Education-led creative can make a short assessment feel relevant and approachable.",
+        entry: "Educational creative, campaign landing page, or direct HRA",
+        prompt: "“Could your symptoms be menopause or perimenopause?”",
+        job: "Create demand upstream and offer a low-pressure action",
+        route: "Avoid implying that the platform knows someone has a sensitive condition. Lead with education and self-directed discovery."
+      },
+      website: {
+        kicker: "Known interest",
+        title: "Activate visitors already exploring care",
+        copy: "A health system website already has trust and context. HRA modules on service-line pages, articles, and centralized hubs can turn passive browsing into an identifiable next step.",
+        entry: "Embedded module, HRA hub, or service-line page",
+        prompt: "“Not sure where to start?”",
+        job: "Convert existing site attention into continued engagement",
+        route: "Use a selection page for broad needs and a direct HRA when the page topic already signals a specific concern."
+      },
+      email: {
+        kicker: "Known audience",
+        title: "Make outreach more relevant",
+        copy: "Email and CRM programs can introduce an HRA to an audience with an established relationship, then use consented completion and result data to shape appropriate follow-up.",
+        entry: "Targeted email, newsletter module, or nurture journey",
+        prompt: "“Start with a quick health check.”",
+        job: "Move known consumers into a personalized journey",
+        route: "Coordinate promotion and follow-up. Email should begin the journey or continue it, not repeat the same message without adding value."
+      }
+    };
+
+    const JOURNEY = {
+      discover: { kicker: "Stage 1", title: "A relevant message earns attention", copy: "The consumer encounters an HRA through paid media, a health system website, email, social content, direct mail, or another trusted touchpoint.", owner: "Health system responsibility", aside: "Connect the message to a real growth priority and a credible consumer need." },
+      choose: { kicker: "Stage 2", title: "The right door reduces confusion", copy: "A specific concern can lead directly to one HRA. A broader question can lead to a selection page that helps the consumer choose among related assessments.", owner: "Experience decision", aside: "Match the number of choices to the clarity of the consumer's intent." },
+      assess: { kicker: "Stage 3", title: "The questions create useful context", copy: "The consumer completes a short, mobile-first assessment using clinically reviewed questions about relevant symptoms, history, behaviors, or screening needs.", owner: "Clinical and content responsibility", aside: "Keep the experience understandable, accessible, supportive, and clear that it is not a diagnosis." },
+      understand: { kicker: "Stage 4", title: "The result explains what matters next", copy: "The consumer receives education shaped by their answers and a recommendation that makes the next step easier to understand.", owner: "Personalization decision", aside: "Use the actual result logic. Not every HRA should be described as producing a risk score." },
+      act: { kicker: "Stage 5", title: "The CTA turns guidance into action", copy: "A tailored call to action may point toward screening, a provider, a location, a callback, a program, another assessment, or urgent support.", owner: "Operational responsibility", aside: "Verify destinations, capacity, phone numbers, URLs, service-line ownership, and escalation pathways before launch." },
+      continue: { kicker: "Stage 6", title: "Follow-up keeps the door open", copy: "With appropriate consent, the journey can continue through reminder email, personalized nurture, CRM routing, contact-center outreach, and performance optimization.", owner: "Growth responsibility", aside: "Measure whether engagement becomes meaningful downstream activity, not only whether the assessment was completed." }
+    };
+
+    const REPORTS = {
+      source: {
+        kicker: "Layer 1 · Acquisition",
+        title: "Understand what created the visit",
+        copy: "Connect campaign, channel, placement, and audience context to the HRA session so the team can see which entry points attract relevant traffic.",
+        question: "Which channels and messages are earning attention?",
+        decision: "Shift investment toward the audiences and entry points that create qualified engagement.",
+        bars: [["Reach", 92, "#db1217"], ["Clicks", 67, "#740316"], ["Visits", 52, "#217caa"], ["HRA starts", 38, "#7dc8ef"]]
+      },
+      engage: {
+        kicker: "Layer 2 · Experience",
+        title: "See where people progress or leave",
+        copy: "Track meaningful milestones across the assessment experience, including starts, question progression, completion, and consented lead capture.",
+        question: "Does the experience sustain engagement and earn a value exchange?",
+        decision: "Improve message match, friction, question flow, and lead-capture timing.",
+        bars: [["HRA starts", 92, "#db1217"], ["Midpoint", 74, "#740316"], ["Completions", 63, "#217caa"], ["Leads", 54, "#7dc8ef"]]
+      },
+      action: {
+        kicker: "Layer 3 · Intent",
+        title: "Measure the next step the result inspires",
+        copy: "Connect the result experience to the specific action offered: schedule, call, find a provider, request outreach, enroll, or continue learning.",
+        question: "Which result pathways create qualified action?",
+        decision: "Refine CTA relevance, placement, language, and destination by result pathway.",
+        bars: [["Result views", 92, "#db1217"], ["CTA views", 82, "#740316"], ["CTA clicks", 46, "#217caa"], ["Calls or forms", 32, "#7dc8ef"]]
+      },
+      access: {
+        kicker: "Layer 4 · Operations",
+        title: "Follow the handoff into access",
+        copy: "Pair digital events with CRM, contact-center, scheduling, or referral activity to understand whether an interested consumer reached a supported care pathway.",
+        question: "Did the operational follow-up help people reach care?",
+        decision: "Improve routing, outreach speed, warm transfers, scheduling support, and service-line ownership.",
+        bars: [["Leads routed", 92, "#db1217"], ["Reached", 71, "#740316"], ["Referred", 49, "#217caa"], ["Scheduled", 37, "#7dc8ef"]]
+      },
+      outcomes: {
+        kicker: "Layer 5 · Business impact",
+        title: "Connect engagement to patients and economics",
+        copy: "When the data and attribution model support it, connect the campaign and HRA journey to encounters, new patients, payer mix, revenue, contribution margin, and ROI.",
+        question: "What downstream value did the connected journey create?",
+        decision: "Prioritize service lines, optimize the conversion path, and make a stronger case for continued investment.",
+        bars: [["HRA leads", 92, "#db1217"], ["Matched patients", 61, "#740316"], ["New patients", 35, "#217caa"], ["ROI", 55, "#7dc8ef"]]
+      }
+    };
+
+    const ROLES = {
+      marketing: { kicker: "For marketing", title: "Turn anonymous traffic into qualified demand", copy: "An HRA gives consumers a meaningful reason to engage while capturing consented information that can support relevant follow-up and better media decisions.", question: "Where are campaigns generating attention without enough qualified action?" },
+      digital: { kicker: "For digital", title: "Give website visitors a useful action", copy: "Embedded HRA modules, service-line landing pages, and assessment hubs create interactive paths for visitors who are interested but not ready to schedule.", question: "Which high-traffic pages lose visitors before they take a meaningful next step?" },
+      population: { kicker: "For population health", title: "Support earlier screening and education", copy: "HRAs can identify people who may benefit from screening guidance or preventive education before a care gap becomes more difficult to address.", question: "Which screening or education priority needs a more accessible entry point?" },
+      service: { kicker: "For service-line leadership", title: "Connect demand to the right care pathway", copy: "Condition-specific assessments can identify motivated consumers and route them toward the provider, program, or appointment action the service line can support.", question: "Which service line has capacity and a clear growth priority, but needs more qualified demand?" },
+      crm: { kicker: "For CRM and patient experience", title: "Create more relevant follow-up", copy: "Consented answers and HRA outcomes can support segmented nurture and operational routing instead of sending every consumer the same generic message.", question: "What happens today after someone shows interest but does not schedule?" },
+      clinical: { kicker: "For clinical leadership", title: "Help consumers reach appropriate care sooner", copy: "Clinically guided education and result logic can help people understand an appropriate next step while maintaining clear limits around diagnosis and urgent care.", question: "Where are patients arriving late, confused, or through the wrong entry point?" }
+    };
+
+    const CASES = {
+      "heart-month": {
+        kicker: "Integrated marketing",
+        title: "Heart Month campaign connected awareness to scheduled screenings",
+        summary: "Audience research, distinctive creative, an HRA, and coordinated promotion moved consumers from a heart-health message into a measurable screening journey.",
+        metrics: [["3.24M", "people reached"], ["820", "HRA completions"], ["393", "scheduled heart screenings"], ["97%", "above the screening goal"]],
+        image: "assets/unlock-sky.jpg",
+        alt: "Unlock blue sky brand image",
+        caption: "Awareness became a measurable screening path"
+      },
+      christus: {
+        kicker: "HRA, paid media, CRM, and call tracking",
+        title: "CHRISTUS connected breast cancer education to local access",
+        summary: "From July 2024 through June 2025, CHRISTUS paired a breast cancer HRA with CRM routing, call attribution, a patient engagement center, nurture, and direct outreach across Texas and Louisiana.",
+        metrics: [["1,221", "completed breast cancer HRAs"], ["824", "scheduled appointments attributed through call tracking"], ["520", "patients attributed to the HRA campaign"], ["94", "new patients"]],
+        image: "assets/christus-hra-results.jpg",
+        alt: "Two mobile phones showing CHRISTUS breast cancer HRA result pathways",
+        caption: "Different results connected consumers to different care actions"
+      },
+      umiami: {
+        kicker: "HRA and ROI Insights",
+        title: "UHealth connected HRA demand to downstream patient value",
+        summary: "After more than seven years of HRA lead generation, UHealth used connected campaign and clinical data to map cardiac conversion, identify new patients, and improve speed to revenue.",
+        metrics: [["8,000+", "unique HRA leads across service lines"], ["585", "new patients"], ["40%", "patients new to the system"], ["33%", "conversions in the first four weeks"]],
+        image: "assets/umiami-roi.jpg",
+        alt: "Traveler studying a map, used in the UHealth ROI case study",
+        caption: "Downstream reporting made the patient journey visible"
+      },
+      multi: {
+        kicker: "SEM, paid social, email, and HRA hub",
+        title: "A centralized HRA ecosystem supported nine health topics",
+        summary: "A regional health system used a branded hub, channel-specific promotion, clear CTAs, and ongoing optimization to make multiple assessments easier to find and use.",
+        metrics: [["92K", "HRA starts"], ["31K", "HRA completions"], ["41%", "email nurture completion"], ["49%", "provider-search CTA engagement"]],
+        image: "assets/unlock-sky.jpg",
+        alt: "Unlock blue sky brand image",
+        caption: "A portfolio approach can make multiple assessments easier to find"
+      }
+    };
+
+    const PRIORITIES = {
+      volume: { title: "Create a lower-friction path into a priority service line", copy: "Use a relevant HRA to engage people who show interest but are not yet ready to book, then connect results to a service-line CTA and follow-up journey.", lead: "The gap between traffic and appointment readiness", measure: "HRA completion, qualified CTA action, appointment activity, and downstream patient volume" },
+      screening: { title: "Turn screening education into a clear next action", copy: "Use an HRA to help consumers understand whether screening may be appropriate, then route each result toward education, scheduling, or provider guidance.", lead: "The population that is missing or delaying recommended screening", measure: "Assessment reach, completion, screening CTA activity, scheduled screenings, and care-gap progress" },
+      conversion: { title: "Get more value from existing campaign traffic", copy: "Add the HRA as an alternative conversion path for consumers who need education before they are ready to schedule directly.", lead: "The point where paid or owned traffic leaves without acting", measure: "Incremental HRA engagement, qualified leads, appointment conversion, and acquisition efficiency" },
+      experience: { title: "Replace a dead end with guided decision support", copy: "Use an embedded HRA module or selection page to help visitors identify a relevant starting point within a broad health-system website.", lead: "The consumer's uncertainty about what service, provider, or action fits", measure: "Module engagement, HRA starts and completions, CTA use, and progression to care" },
+      data: { title: "Create a value exchange for consented first-party data", copy: "Offer personalized education and next steps in return for voluntary engagement, then use approved data to support relevant outreach and measurement.", lead: "The need to understand consumer interest without relying on anonymous traffic alone", measure: "Consented lead capture, profile completeness, follow-up engagement, and downstream conversion" }
+    };
+
+    const GAPS = {
+      unready: { path: ["Relevant message", "Short assessment", "Personalized guidance", "CTA when ready"], add: "Offer a useful step before asking for an appointment." },
+      unknown: { path: ["Broad entry", "Selection page", "Right HRA", "Relevant care path"], add: "Reduce choice overload and help the consumer find a starting point." },
+      traffic: { path: ["Existing traffic", "HRA engagement", "Qualified lead", "Appointment path"], add: "Keep the current acquisition engine and add a stronger conversion option." },
+      followup: { path: ["HRA result", "Consent", "Segmented nurture", "Operational routing"], add: "Use the result and readiness signal to make follow-up more relevant." },
+      measurement: { path: ["Source tracking", "HRA events", "CTA action", "Downstream outcome"], add: "Connect promotion, assessment behavior, and care activity with privacy-safe measurement." }
+    };
+
+    function bindPressed(selector, callback) {
+      document.querySelectorAll(selector).forEach((button) => {
+        button.addEventListener("click", () => {
+          document.querySelectorAll(selector).forEach((item) => item.setAttribute("aria-pressed", item === button ? "true" : "false"));
+          callback(button);
+        });
+      });
+    }
+
+    function bindTabs(selector, callback) {
+      const tabs = Array.from(document.querySelectorAll(selector));
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((item) => item.setAttribute("aria-selected", item === tab ? "true" : "false"));
+          callback(tab);
+        });
+        tab.addEventListener("keydown", (event) => {
+          if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+          event.preventDefault();
+          let next = index;
+          if (event.key === "ArrowRight" || event.key === "ArrowDown") next = (index + 1) % tabs.length;
+          if (event.key === "ArrowLeft" || event.key === "ArrowUp") next = (index - 1 + tabs.length) % tabs.length;
+          if (event.key === "Home") next = 0;
+          if (event.key === "End") next = tabs.length - 1;
+          tabs[next].focus();
+          tabs[next].click();
+        });
+      });
+    }
+
+    function renderLens(key) {
+      const lens = LENSES[key];
+      document.body.dataset.lens = key;
+      document.getElementById("lens-note").textContent = lens.note;
+      document.getElementById("lens-path-title").textContent = lens.pathTitle;
+      document.getElementById("lens-path-copy").textContent = lens.pathCopy;
+      document.getElementById("lens-start-title").textContent = lens.startTitle;
+      document.getElementById("lens-start-copy").textContent = lens.startCopy;
+      document.getElementById("lens-watch-title").textContent = lens.watchTitle;
+      document.getElementById("lens-watch-copy").textContent = lens.watchCopy;
+
+      document.querySelectorAll(".lens-context").forEach((context) => {
+        const sectionKey = context.dataset.lensSection;
+        const [lead, copy] = lens.sections[sectionKey];
+        context.querySelector(".lens-badge").textContent = lens.label;
+        context.querySelector("span:nth-child(2)").innerHTML = `<b>${lead}:</b> ${copy}`;
+        const section = context.closest(".section");
+        section.classList.toggle("is-lens-priority", lens.priorities.includes(sectionKey));
+      });
+
+      document.querySelectorAll(".topnav a").forEach((link) => {
+        link.classList.toggle("priority-link", lens.priorities.includes(link.getAttribute("href").slice(1)));
+      });
+    }
+
+    bindPressed(".lens-button", (button) => renderLens(button.dataset.lens));
+
+    bindPressed(".state-button", (button) => {
+      const item = STATES[button.dataset.state];
+      document.getElementById("state-title").textContent = item.title;
+      document.getElementById("state-copy").textContent = item.copy;
+    });
+
+    bindTabs(".channel-tab", (tab) => {
+      const item = CHANNELS[tab.dataset.channel];
+      document.getElementById("channel-kicker").textContent = item.kicker;
+      document.getElementById("channel-title").textContent = item.title;
+      document.getElementById("channel-copy").textContent = item.copy;
+      document.getElementById("channel-entry").textContent = item.entry;
+      document.getElementById("channel-prompt").textContent = item.prompt;
+      document.getElementById("channel-job").textContent = item.job;
+      document.getElementById("channel-route").innerHTML = "<strong>Routing principle:</strong> " + item.route;
+    });
+
+    bindTabs(".journey-step", (tab) => {
+      const item = JOURNEY[tab.dataset.step];
+      document.getElementById("journey-kicker").textContent = item.kicker;
+      document.getElementById("journey-title").textContent = item.title;
+      document.getElementById("journey-copy").textContent = item.copy;
+      document.getElementById("journey-owner").textContent = item.owner;
+      document.getElementById("journey-aside").textContent = item.aside;
+    });
+
+    function renderReport(key) {
+      const item = REPORTS[key];
+      document.getElementById("report-kicker").textContent = item.kicker;
+      document.getElementById("report-title").textContent = item.title;
+      document.getElementById("report-copy").textContent = item.copy;
+      document.getElementById("report-question").textContent = item.question;
+      document.getElementById("report-decision").textContent = item.decision;
+      document.getElementById("report-chart").innerHTML = item.bars.map(([label, height, color]) => `<div class="report-bar"><i style="height:${height}%;--bar-color:${color}"></i><b>${label}</b></div>`).join("");
+    }
+
+    bindTabs(".report-tab", (tab) => renderReport(tab.dataset.report));
+    renderReport("source");
+
+    bindTabs(".role-tab", (tab) => {
+      const item = ROLES[tab.dataset.role];
+      document.getElementById("role-kicker").textContent = item.kicker;
+      document.getElementById("role-title").textContent = item.title;
+      document.getElementById("role-copy").textContent = item.copy;
+      document.getElementById("role-question").textContent = item.question;
+    });
+
+    function renderCase(key) {
+      const item = CASES[key];
+      document.getElementById("case-kicker").textContent = item.kicker;
+      document.getElementById("case-title").textContent = item.title;
+      document.getElementById("case-summary").textContent = item.summary;
+      document.getElementById("case-metrics").innerHTML = item.metrics.map(([value, label]) => `<div class="metric"><strong>${value}</strong><span>${label}</span></div>`).join("");
+      document.getElementById("case-image").src = item.image;
+      document.getElementById("case-image").alt = item.alt;
+      document.getElementById("case-caption").textContent = item.caption;
+    }
+
+    bindTabs(".case-tab", (tab) => renderCase(tab.dataset.case));
+    renderCase("heart-month");
+
+    function renderBuilder() {
+      const priority = PRIORITIES[document.getElementById("priority-select").value];
+      const gap = GAPS[document.getElementById("gap-select").value];
+      document.getElementById("builder-title").textContent = priority.title;
+      document.getElementById("builder-copy").textContent = priority.copy + " " + gap.add;
+      document.getElementById("builder-path").innerHTML = gap.path.map((step) => `<span>${step}</span>`).join("");
+      document.getElementById("builder-lead").textContent = priority.lead;
+      document.getElementById("builder-measure").textContent = priority.measure;
+    }
+
+    document.getElementById("priority-select").addEventListener("change", renderBuilder);
+    document.getElementById("gap-select").addEventListener("change", renderBuilder);
+    renderBuilder();
+    renderLens("learn");
+  </script>
+</body>
+</html>

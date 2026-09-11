@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Unlock HRA 101 · v3</title>
+  <link rel="icon" href="assets/unlock-red.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #e30613;
+      --ink: #121214;
+      --plum: #4d273f;
+      --blue: #dff3fb;
+      --blue-strong: #5bc7f1;
+      --peach: #fff2e8;
+      --paper: #ffffff;
+      --fog: #f5f5f3;
+      --line: #dededb;
+      --muted: #5d5d61;
+      --radius: 20px;
+      --shadow: 0 20px 50px rgba(18,18,20,.08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: Inter, Arial, sans-serif; line-height: 1.5; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .eyebrow { margin: 0 0 12px; color: #8c0010; font-size: .73rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .lede { color: var(--muted); font-size: 1.12rem; line-height: 1.65; }
+    .muted { color: var(--muted); }
+    .topbar { position: sticky; z-index: 20; top: 0; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.94); backdrop-filter: blur(14px); }
+    .topbar-inner { min-height: 70px; display: flex; align-items: center; gap: 28px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; white-space: nowrap; }
+    .brand img { width: 45px; height: 36px; object-fit: contain; }
+    .brand span { border-left: 1px solid var(--line); padding-left: 12px; }
+    .topnav { display: flex; gap: 22px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+    .topnav::-webkit-scrollbar { display: none; }
+    .topnav a { position: relative; padding: 24px 0 22px; color: #424247; font-size: .82rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+    .topnav a::after { position: absolute; right: 0; bottom: 0; left: 0; height: 3px; content: ""; background: var(--red); transform: scaleX(0); transition: transform .2s; }
+    .topnav a:hover::after, .topnav a[aria-current="true"]::after { transform: scaleX(1); }
+    .hero { padding: 78px 0 34px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.03fr .97fr; gap: 64px; align-items: center; }
+    h1, h2, h3, p { text-wrap: pretty; }
+    h1 { max-width: 780px; margin: 0; font-size: clamp(3rem, 6.2vw, 5.8rem); line-height: .94; letter-spacing: -.065em; }
+    h1 span, h2 span { color: var(--red); }
+    .hero-copy .lede { max-width: 680px; margin: 28px 0 0; }
+    .hero-definition { margin-top: 25px; border-left: 5px solid var(--blue-strong); background: var(--blue); }
+    .hero-definition > strong { display: block; padding: 15px 18px 11px; font-size: .86rem; }
+    .hero-value-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(18,18,20,.12); }
+    .hero-value { padding: 15px 18px 17px; }
+    .hero-value + .hero-value { border-left: 1px solid rgba(18,18,20,.12); }
+    .hero-value small { display: block; margin-bottom: 5px; color: #8c0010; font-size: .65rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .hero-value span { display: block; font-size: .86rem; line-height: 1.42; }
+    .hero-stage { position: relative; min-height: 520px; border-radius: 36px; background: linear-gradient(140deg, #bce7ee, #fff5eb 58%, #f2c9d1); overflow: hidden; box-shadow: var(--shadow); }
+    .hero-stage::before { position: absolute; inset: 0; content: ""; background: linear-gradient(150deg, transparent 45%, rgba(255,255,255,.8)); }
+    .phone { position: absolute; width: 42%; border: 9px solid #17171a; border-radius: 33px; background: white; box-shadow: 0 25px 60px rgba(18,18,20,.2); overflow: hidden; }
+    .phone.one { left: 9%; top: 10%; transform: rotate(-6deg); }
+    .phone.two { right: 8%; bottom: -5%; transform: rotate(5deg); }
+    .phone img { width: 100%; height: 460px; object-fit: contain; object-position: center; background: white; }
+    .stage-tag { position: absolute; z-index: 2; right: 24px; top: 25px; max-width: 185px; padding: 12px 14px; border-radius: 12px; color: white; background: var(--ink); font-size: .78rem; font-weight: 700; }
+    .guided { margin-top: 58px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--fog); overflow: hidden; }
+    .guided-head { padding: 20px 24px 10px; }
+    .guide-buttons { display: flex; gap: 8px; padding: 0 24px 20px; overflow-x: auto; }
+    .guide-button { min-width: max-content; padding: 11px 16px; border: 1px solid #cfcfcb; border-radius: 999px; background: white; font-weight: 700; }
+    .guide-button[aria-pressed="true"] { color: white; border-color: var(--ink); background: var(--ink); }
+    .guide-result { display: grid; grid-template-columns: 1.25fr .75fr; gap: 32px; padding: 24px; border-top: 1px solid var(--line); background: white; }
+    .guide-result h2 { max-width: 720px; margin: 0; font-size: clamp(1.7rem, 3vw, 2.7rem); line-height: 1.06; letter-spacing: -.04em; }
+    .guide-result p { margin: 12px 0 0; color: var(--muted); }
+    .route-links { display: grid; gap: 8px; align-content: center; }
+    .route-links a { display: flex; justify-content: space-between; gap: 15px; padding: 11px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-size: .88rem; font-weight: 700; text-decoration: none; }
+    .route-links a::after { color: var(--red); content: "↓"; }
+    .section { padding: 100px 0; border-top: 1px solid var(--line); }
+    .section.soft { background: var(--fog); }
+    .section.peach { background: var(--peach); }
+    .section-head { display: grid; grid-template-columns: 1.1fr .9fr; gap: 80px; align-items: end; margin-bottom: 40px; }
+    .section-head h2 { max-width: 760px; margin: 0; font-size: clamp(2.25rem, 4vw, 4.3rem); line-height: .98; letter-spacing: -.055em; }
+    .section-head > p { max-width: 520px; margin: 0; }
+    .three-answers { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: var(--radius); background: white; overflow: hidden; box-shadow: var(--shadow); }
+    .answer { padding: 28px; }
+    .answer + .answer { border-left: 1px solid var(--line); }
+    .answer .num { display: inline-grid; width: 32px; height: 32px; margin-bottom: 26px; place-items: center; border-radius: 50%; color: white; background: var(--red); font-size: .78rem; font-weight: 800; }
+    .answer h3 { margin: 0 0 10px; font-size: 1.35rem; letter-spacing: -.025em; }
+    .answer p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .not-box { display: grid; grid-template-columns: auto 1fr; gap: 16px; margin-top: 24px; padding: 19px 22px; border: 1px solid #f0c7ca; border-radius: 14px; background: #fff8f8; }
+    .not-box b { color: var(--red); }
+    .not-box p { margin: 0; }
+    .catalog-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 24px; }
+    .search { min-width: 250px; flex: 1 1 330px; padding: 12px 14px; border: 1px solid #bdbdb9; border-radius: 10px; background: white; }
+    .filter-row { display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none; }
+    .filter-button { min-width: max-content; padding: 9px 12px; border: 1px solid #cfcfcb; border-radius: 999px; background: white; font-size: .8rem; font-weight: 700; }
+    .filter-button[aria-pressed="true"] { color: white; border-color: var(--ink); background: var(--ink); }
+    .catalog-meta { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin: 0 0 16px; color: var(--muted); font-size: .84rem; }
+    .catalog-toggle { border: 0; color: #8c0010; background: transparent; font-weight: 800; text-decoration: underline; }
+    .catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .hra-card { display: flex; min-height: 170px; flex-direction: column; padding: 21px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+    .hra-card small { color: #8c0010; font-size: .67rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .hra-card h3 { margin: 10px 0 8px; font-size: 1.14rem; }
+    .hra-card p { margin: 0; color: var(--muted); font-size: .82rem; }
+    .hra-links { display: flex; flex-wrap: wrap; gap: 13px; margin-top: auto; padding-top: 18px; }
+    .hra-links a { color: #8c0010; font-size: .78rem; font-weight: 800; text-decoration: none; }
+    .selection-callout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 28px; align-items: center; margin-top: 32px; padding: 26px; border-radius: var(--radius); background: var(--ink); color: white; }
+    .selection-callout h3 { margin: 0 0 8px; font-size: 1.6rem; }
+    .selection-callout p { margin: 0 0 18px; color: #d9d9db; }
+    .selection-callout img { width: 100%; height: 360px; padding: 12px; border-radius: 13px; object-fit: contain; object-position: center; background: #e5f0e5; }
+    .text-link { display: inline-flex; align-items: center; gap: 8px; color: inherit; font-size: .86rem; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+    .activation-section { background: linear-gradient(145deg, #effaff 0%, #fff 48%, #fff7ef 100%); }
+    .activation-principle { display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: center; margin-bottom: 28px; padding: 22px 25px; border-radius: 16px; color: white; background: var(--ink); }
+    .activation-principle .spark { display: grid; width: 46px; height: 46px; place-items: center; border-radius: 50%; color: var(--ink); background: var(--blue-strong); font-size: 1.35rem; }
+    .activation-principle strong { display: block; font-size: 1.03rem; }
+    .activation-principle p { margin: 4px 0 0; color: #cfcfd2; font-size: .84rem; }
+    .activation-principle .subscription { max-width: 230px; padding-left: 22px; border-left: 1px solid #45454a; font-size: .76rem; font-weight: 700; }
+    .activation-map { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 12px; align-items: stretch; }
+    .channel-stack, .conversion-layer { padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: white; box-shadow: var(--shadow); }
+    .channel-stack h3, .conversion-layer h3 { margin: 0 0 7px; font-size: 1.15rem; }
+    .channel-stack > p, .conversion-layer > p { margin: 0 0 17px; color: var(--muted); font-size: .8rem; }
+    .channel-list { display: flex; flex-wrap: wrap; gap: 7px; }
+    .channel-list span { padding: 7px 9px; border-radius: 7px; background: var(--fog); font-size: .72rem; font-weight: 700; }
+    .channel-stack.paid { border-top: 5px solid var(--red); }
+    .channel-stack.owned { border-top: 5px solid #007b89; }
+    .conversion-layer { position: relative; color: white; border-color: var(--plum); background: var(--plum); }
+    .conversion-layer::before, .conversion-layer::after { position: absolute; top: 50%; color: var(--red); font-size: 1.15rem; font-weight: 900; transform: translateY(-50%); }
+    .conversion-layer::before { left: -11px; content: "→"; }
+    .conversion-layer::after { right: -11px; content: "←"; }
+    .conversion-layer > p { color: #eadde5; }
+    .conversion-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+    .conversion-steps span { padding: 9px 5px; border-radius: 7px; color: var(--plum); background: white; font-size: .68rem; font-weight: 800; text-align: center; }
+    .measurement-row { display: grid; grid-template-columns: repeat(4, 1fr); margin: 13px 0 34px; border: 1px solid var(--line); border-radius: 13px; background: white; overflow: hidden; }
+    .measurement-row div { padding: 15px 17px; }
+    .measurement-row div + div { border-left: 1px solid var(--line); }
+    .measurement-row small { display: block; color: #8c0010; font-size: .62rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+    .measurement-row strong { display: block; margin-top: 5px; font-size: .77rem; }
+    .activation-explorer { border: 1px solid var(--line); border-radius: var(--radius); background: white; overflow: hidden; box-shadow: var(--shadow); }
+    .activation-tabs { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+    .activation-tab { padding: 16px; border: 0; border-right: 1px solid var(--line); background: white; text-align: left; }
+    .activation-tab:last-child { border-right: 0; }
+    .activation-tab small { display: block; margin-bottom: 5px; color: var(--red); font-size: .66rem; font-weight: 800; }
+    .activation-tab strong { font-size: .88rem; }
+    .activation-tab[aria-selected="true"] { color: white; background: var(--ink); }
+    .activation-tab[aria-selected="true"] small { color: #ffabb1; }
+    .activation-panel { display: grid; grid-template-columns: .72fr 1.28fr; gap: 38px; align-items: center; padding: 30px; }
+    .activation-copy h3 { margin: 0 0 12px; font-size: clamp(1.7rem, 3vw, 2.7rem); line-height: 1.04; letter-spacing: -.04em; }
+    .activation-copy > p { color: var(--muted); }
+    .activation-detail { margin: 20px 0; padding: 15px 17px; border-left: 4px solid var(--blue-strong); background: var(--blue); font-size: .84rem; }
+    .activation-links { display: flex; flex-wrap: wrap; gap: 15px; }
+    .activation-links a { color: #8c0010; font-size: .78rem; font-weight: 800; }
+    .activation-visual { height: 500px; margin: 0; padding: 16px; border-radius: 15px; background: var(--fog); overflow: hidden; }
+    .activation-visual img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+    .journey-tabs { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); border-radius: 14px; background: white; overflow: hidden; }
+    .journey-tab { padding: 15px 12px; border: 0; border-right: 1px solid var(--line); background: white; text-align: left; }
+    .journey-tab:last-child { border-right: 0; }
+    .journey-tab small { display: block; margin-bottom: 5px; color: var(--red); font-weight: 800; }
+    .journey-tab strong { font-size: .92rem; }
+    .journey-tab[aria-selected="true"] { color: white; background: var(--plum); }
+    .journey-tab[aria-selected="true"] small { color: #ffdce0; }
+    .journey-panel { display: grid; grid-template-columns: .8fr 1.2fr; gap: 40px; align-items: center; min-height: 460px; margin-top: 15px; padding: 32px; border: 1px solid var(--line); border-radius: var(--radius); background: white; box-shadow: var(--shadow); }
+    .journey-copy h3 { margin: 0 0 14px; font-size: clamp(1.8rem, 3vw, 3rem); line-height: 1.04; letter-spacing: -.04em; }
+    .journey-copy p { color: var(--muted); }
+    .journey-note { padding: 14px 16px; border-left: 4px solid var(--blue-strong); background: var(--blue); font-size: .86rem; }
+    .journey-visual { height: 440px; padding: 14px; border-radius: 16px; background: #f0f0f1; overflow: hidden; }
+    .journey-visual img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+    .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+    .principle { padding: 23px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+    .principle h3 { margin: 0 0 8px; font-size: 1.06rem; }
+    .principle p { margin: 0; color: var(--muted); font-size: .86rem; }
+    .principle a { display: inline-block; margin-top: 14px; color: #8c0010; font-size: .78rem; font-weight: 800; }
+    .connection-choice { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: stretch; }
+    .connection-card { position: relative; padding: 32px; border: 1px solid var(--line); border-radius: var(--radius); background: white; box-shadow: var(--shadow); }
+    .connection-card .label { display: inline-block; margin-bottom: 20px; padding: 6px 9px; border-radius: 6px; color: #8c0010; background: #ffe7e9; font-size: .69rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .connection-card h3 { margin: 0 0 12px; font-size: 1.65rem; letter-spacing: -.035em; }
+    .connection-card > p { color: var(--muted); }
+    .connection-card ul { margin: 22px 0 0; padding: 0; list-style: none; }
+    .connection-card li { display: flex; gap: 10px; padding: 10px 0; border-top: 1px solid var(--line); font-size: .9rem; }
+    .connection-card li::before { color: var(--red); content: "✓"; font-weight: 900; }
+    .choice-or { display: grid; width: 48px; height: 48px; align-self: center; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: white; font-size: .72rem; font-weight: 800; }
+    .both-note { margin: 22px 0 0; padding: 16px 18px; border-left: 4px solid var(--blue-strong); background: var(--blue); }
+    .both-note p { margin: 0; font-size: .9rem; }
+    .connection-card .text-link { margin-top: 20px; color: #8c0010; }
+    .integration-flow { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 24px; border: 1px solid var(--line); border-radius: 14px; background: white; overflow: hidden; }
+    .flow-step { position: relative; padding: 20px; }
+    .flow-step + .flow-step { border-left: 1px solid var(--line); }
+    .flow-step + .flow-step::before { position: absolute; left: -11px; top: 22px; display: grid; width: 21px; height: 21px; place-items: center; border-radius: 50%; color: white; background: var(--red); content: "→"; font-size: .68rem; font-weight: 800; }
+    .flow-step small { display: block; color: #8c0010; font-size: .65rem; font-weight: 800; text-transform: uppercase; }
+    .flow-step b { display: block; margin-top: 7px; font-size: .94rem; }
+    .flow-step span { display: block; margin-top: 7px; color: var(--muted); font-size: .77rem; }
+    .report-layout { display: grid; grid-template-columns: 280px 1fr; gap: 16px; }
+    .self-service-strip { display: grid; grid-template-columns: repeat(3, 1fr); margin-bottom: 22px; border: 1px solid var(--line); border-radius: 14px; background: white; overflow: hidden; }
+    .self-service-strip div { padding: 19px 21px; }
+    .self-service-strip div + div { border-left: 1px solid var(--line); }
+    .self-service-strip small { display: block; color: #8c0010; font-size: .66rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .self-service-strip strong { display: block; margin-top: 7px; font-size: .91rem; }
+    .report-tabs { display: grid; gap: 8px; align-content: start; }
+    .report-tab { padding: 16px; border: 1px solid var(--line); border-radius: 11px; background: white; text-align: left; font-weight: 800; }
+    .report-tab small { display: block; margin-top: 5px; color: var(--muted); font-size: .7rem; font-weight: 500; }
+    .report-tab[aria-selected="true"] { color: white; border-color: var(--plum); background: var(--plum); }
+    .report-tab[aria-selected="true"] small { color: #eadde5; }
+    .report-panel { min-width: 0; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: white; box-shadow: var(--shadow); }
+    .report-panel h3 { margin: 0 0 8px; font-size: 1.6rem; letter-spacing: -.03em; }
+    .report-panel > p { margin: 0 0 20px; color: var(--muted); }
+    .report-panel figure { margin: 0; }
+    .report-panel img { width: 100%; max-height: 510px; border: 1px solid #e5e5e5; border-radius: 10px; object-fit: contain; background: #f4f4f5; }
+    .report-panel figcaption { margin-top: 10px; color: var(--muted); font-size: .74rem; }
+    .report-scope { margin-top: 22px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+    .report-scope p { margin: 0; }
+    .report-topics { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+    .report-topics span { padding: 7px 10px; border-radius: 999px; color: #4d273f; background: #f0e7ed; font-size: .74rem; font-weight: 800; }
+    .measure-ladder { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 22px; border-radius: 13px; color: white; background: var(--ink); overflow: hidden; }
+    .measure-ladder div { padding: 18px; }
+    .measure-ladder div + div { border-left: 1px solid #3e3e42; }
+    .measure-ladder small { display: block; color: #bcbcc0; font-size: .64rem; font-weight: 800; text-transform: uppercase; }
+    .measure-ladder strong { display: block; margin-top: 6px; font-size: .91rem; }
+    .case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 30px; }
+    .case { display: grid; grid-template-columns: 1fr 150px; gap: 22px; min-height: 310px; padding: 25px; border: 1px solid var(--line); border-radius: var(--radius); background: white; }
+    .case h3 { margin: 0 0 8px; font-size: 1.35rem; }
+    .case p { margin: 0; color: var(--muted); font-size: .84rem; }
+    .case-metrics { display: flex; flex-wrap: wrap; gap: 12px 20px; margin: 22px 0; }
+    .case-metrics strong { display: block; font-size: 1.42rem; line-height: 1; }
+    .case-metrics small { color: var(--muted); font-size: .66rem; }
+    .case img { width: 150px; height: 255px; padding: 5px; border-radius: 12px; object-fit: contain; object-position: center; background: #f2f2f3; }
+    .resource-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .resource { display: flex; min-height: 175px; flex-direction: column; padding: 23px; border: 1px solid var(--line); border-radius: 14px; background: white; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+    .resource:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .resource small { color: #8c0010; font-size: .67rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .resource strong { margin: 10px 0 8px; font-size: 1.05rem; }
+    .resource span { color: var(--muted); font-size: .8rem; }
+    .resource em { margin-top: auto; padding-top: 16px; color: #8c0010; font-size: .76rem; font-style: normal; font-weight: 800; }
+    .resource.placeholder { border-style: dashed; background: var(--fog); }
+    .access-note { display: flex; justify-content: space-between; gap: 24px; align-items: center; margin-top: 22px; padding: 20px 22px; border-left: 5px solid var(--blue-strong); background: var(--blue); }
+    .access-note p { margin: 0; }
+    .access-note a { flex: 0 0 auto; color: #8c0010; font-weight: 800; }
+    footer { padding: 34px 0; border-top: 1px solid var(--line); background: var(--ink); color: white; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; color: #c9c9cb; font-size: .75rem; }
+    .back-top { color: white; font-weight: 800; }
+    :focus-visible { outline: 3px solid var(--blue-strong); outline-offset: 3px; }
+    [hidden] { display: none !important; }
+
+    @media (max-width: 980px) {
+      .topnav a:nth-child(4), .topnav a:nth-child(5) { display: none; }
+      .hero-grid, .section-head, .guide-result { grid-template-columns: 1fr; gap: 28px; }
+      .hero-stage { min-height: 470px; }
+      .catalog-grid, .principles, .resource-grid { grid-template-columns: repeat(2, 1fr); }
+      .activation-map { grid-template-columns: 1fr; }
+      .conversion-layer::before, .conversion-layer::after { display: none; }
+      .activation-panel { grid-template-columns: 1fr; }
+      .connection-choice { grid-template-columns: 1fr; }
+      .choice-or { margin: -4px auto; }
+      .report-layout { grid-template-columns: 1fr; }
+      .report-tabs { grid-template-columns: repeat(4, 1fr); }
+      .report-tab { font-size: .8rem; }
+      .case-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 680px) {
+      .shell { width: min(100% - 28px, 1180px); }
+      html { scroll-padding-top: 68px; }
+      .topbar-inner { min-height: 62px; }
+      .brand span { font-size: .86rem; }
+      .topnav { gap: 15px; }
+      .topnav a { padding: 21px 0 19px; font-size: .75rem; }
+      .topnav a:nth-child(n+3) { display: none; }
+      .hero { padding-top: 50px; }
+      h1 { font-size: clamp(2.9rem, 15vw, 4.3rem); }
+      .hero-stage { min-height: 390px; }
+      .hero-value-grid { grid-template-columns: 1fr; }
+      .hero-value + .hero-value { border-top: 1px solid rgba(18,18,20,.12); border-left: 0; }
+      .phone { width: 48%; border-width: 6px; border-radius: 24px; }
+      .phone img { height: 340px; }
+      .stage-tag { right: 12px; top: 12px; max-width: 150px; }
+      .guided { margin-top: 36px; }
+      .guide-buttons { padding-right: 16px; padding-left: 16px; }
+      .guide-result { padding: 20px; }
+      .section { padding: 68px 0; }
+      .section-head { margin-bottom: 28px; }
+      .section-head h2 { font-size: 2.55rem; }
+      .three-answers, .catalog-grid, .principles, .resource-grid { grid-template-columns: 1fr; }
+      .answer + .answer { border-top: 1px solid var(--line); border-left: 0; }
+      .catalog-grid .hra-card:nth-child(n+7) { display: none; }
+      .catalog-grid.expanded .hra-card { display: flex; }
+      .selection-callout, .journey-panel { grid-template-columns: 1fr; }
+      .selection-callout img { height: 430px; }
+      .activation-principle { grid-template-columns: auto 1fr; }
+      .activation-principle .subscription { grid-column: 1 / -1; max-width: none; padding: 15px 0 0; border-top: 1px solid #45454a; border-left: 0; }
+      .activation-tabs { display: flex; overflow-x: auto; }
+      .activation-tab { min-width: 145px; }
+      .activation-panel { padding: 21px; }
+      .activation-visual { height: 430px; order: -1; }
+      .measurement-row { grid-template-columns: 1fr 1fr; }
+      .measurement-row div:nth-child(3) { border-top: 1px solid var(--line); border-left: 0; }
+      .measurement-row div:nth-child(4) { border-top: 1px solid var(--line); }
+      .journey-tabs { display: flex; overflow-x: auto; }
+      .journey-tab { min-width: 125px; }
+      .journey-panel { min-height: 0; padding: 21px; }
+      .journey-visual { height: 390px; order: -1; }
+      .integration-flow, .measure-ladder { grid-template-columns: 1fr; }
+      .flow-step + .flow-step, .measure-ladder div + div { border-top: 1px solid var(--line); border-left: 0; }
+      .flow-step + .flow-step::before { left: 18px; top: -11px; content: "↓"; }
+      .report-tabs { display: flex; overflow-x: auto; }
+      .report-tab { min-width: 160px; }
+      .report-panel { padding: 18px; }
+      .self-service-strip { grid-template-columns: 1fr; }
+      .self-service-strip div + div { border-top: 1px solid var(--line); border-left: 0; }
+      .case { grid-template-columns: 1fr; }
+      .case img { width: 100%; height: 360px; }
+      .access-note { align-items: flex-start; flex-direction: column; }
+      .footer-inner { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .001ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top" aria-label="Unlock HRA 101 home"><img src="assets/unlock-red.png" alt="Unlock"><span>HRA 101</span></a>
+      <nav class="topnav" aria-label="Page sections">
+        <a href="#what">What it is</a>
+        <a href="#explore">Explore HRAs</a>
+        <a href="#activation">Activation</a>
+        <a href="#experience">How it works</a>
+        <a href="#connect">Follow-up</a>
+        <a href="#measure">Measure</a>
+        <a href="#resources">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">A five-minute introduction to Unlock HRAs</p>
+            <h1>Turn health curiosity into a <span>confident next step.</span></h1>
+            <p class="lede">An HRA is a clinically grounded, white-label digital experience that helps a consumer understand a health concern, recommends an appropriate action, and gives the health system a way to continue and measure the relationship.</p>
+            <div class="hero-definition">
+              <strong>One HRA. Value on both sides.</strong>
+              <div class="hero-value-grid">
+                <div class="hero-value"><small>For consumers</small><span>Personalized health education and recommended next steps.</span></div>
+                <div class="hero-value"><small>For marketers &amp; health systems</small><span>Important, consented first-party data that helps drive targeted care encounters.</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-stage" aria-label="Examples of a white-label selection page and personalized HRA result">
+            <div class="stage-tag">Real client-branded experiences—not generic quizzes.</div>
+            <div class="phone one"><img src="assets/ortho-selection-page.jpg" alt="White-label orthopedic HRA selection page"></div>
+            <div class="phone two"><img src="assets/heart-recommended-cta.jpg" alt="White-label Heart HRA result with recommended next actions"></div>
+          </div>
+        </div>
+
+        <div class="guided" aria-label="Choose a guided path">
+          <div class="guided-head"><p class="eyebrow">Choose your five-minute path</p></div>
+          <div class="guide-buttons">
+            <button class="guide-button" type="button" data-guide="learn" aria-pressed="true">I’m new to HRAs</button>
+            <button class="guide-button" type="button" data-guide="explain" aria-pressed="false">I need to explain one</button>
+            <button class="guide-button" type="button" data-guide="see" aria-pressed="false">I want to see one</button>
+            <button class="guide-button" type="button" data-guide="resource" aria-pressed="false">I need a resource</button>
+          </div>
+          <div class="guide-result" aria-live="polite">
+            <div><p class="eyebrow" id="guide-kicker">Best first visit</p><h2 id="guide-title">Understand the story, then make it real.</h2><p id="guide-copy">Learn why the product exists, open one live demo, and see how follow-up and measurement extend the experience.</p></div>
+            <nav class="route-links" id="guide-links" aria-label="Recommended route"></nav>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="what">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="eyebrow">01 · The essential idea</p><h2>It fills the gap between <span>interest</span> and action.</h2></div>
+          <p class="lede">A consumer may be researching a symptom, wondering about risk, or unsure where to start. Asking for an appointment immediately can be too much. An HRA offers a smaller, useful step.</p>
+        </div>
+        <div class="three-answers">
+          <article class="answer"><span class="num">1</span><h3>Help someone understand</h3><p>Short, clinically reviewed questions turn a broad concern into personalized education and context.</p></article>
+          <article class="answer"><span class="num">2</span><h3>Recommend what comes next</h3><p>Results connect the consumer to an appropriate CTA—care, education, another HRA, or continued support.</p></article>
+          <article class="answer"><span class="num">3</span><h3>Continue the relationship</h3><p>Consented data, follow-up capabilities, integrations, and reporting make the HRA part of a managed program.</p></article>
+        </div>
+        <div class="not-box"><b>What it is not</b><p>An HRA is pre-diagnostic. It does not diagnose a condition or replace a clinician’s judgment, and it should not be treated as a quiz that simply ends with a score. <a href="#clinical">See the clinical foundation ↓</a></p></div>
+      </div>
+    </section>
+
+    <section class="section soft" id="explore">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="eyebrow">02 · Explore the portfolio</p><h2>Start with a service line. Then <span>try it.</span></h2></div>
+          <p class="lede">The fastest way to understand an HRA is to experience one. Browse by category and open a demo; clinical documentation is available when you need the methodology.</p>
+        </div>
+        <div class="catalog-tools">
+          <input class="search" id="hra-search" type="search" placeholder="Search an HRA, such as Heart or Back & Neck" aria-label="Search available HRAs">
+          <div class="filter-row" id="catalog-filters" aria-label="Filter by service line"></div>
+        </div>
+        <div class="catalog-meta"><span id="catalog-count" aria-live="polite"></span><button class="catalog-toggle" id="catalog-toggle" type="button">Show all HRAs</button></div>
+        <div class="catalog-grid" id="catalog-grid"></div>
+
+        <div class="selection-callout">
+          <div><p class="eyebrow" style="color:#ff9da4">When the starting point is broad</p><h3>A selection page helps the consumer choose.</h3><p>Related HRAs can live behind one service-line entry point, reducing choice overload without forcing someone to understand the organization’s structure first.</p><a class="text-link" href="https://hra-demo.unlockhealthnow.com/v3/8ca17c28-adb3-410a-b367-b5a3b4dbb351?fakedata=true&amp;utm_source=google&amp;utm_medium=paid-search&amp;utm_campaign=hra-demo" target="_blank" rel="noopener noreferrer">Try the orthopedic selection page ↗</a></div>
+          <img src="assets/ortho-selection-page.jpg" alt="Orthopedic HRA selection page with Knee and Hip, Back and Neck, and Shoulder and Elbow choices">
+        </div>
+      </div>
+    </section>
+
+    <section class="section activation-section" id="activation">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="eyebrow">03 · Build the activation</p><h2>How do HRAs fit into a <span>broader strategy?</span></h2></div>
+          <p class="lede">The strongest HRA programs are omnichannel. Paid media creates demand and captures intent, while owned and integrated marketing place the same useful next step wherever consumers already encounter the brand.</p>
+        </div>
+
+        <div class="activation-principle">
+          <span class="spark" aria-hidden="true">✦</span>
+          <div><strong>Internal shorthand: use HRAs like glitter.</strong><p>Place them anywhere they add relevance—from a search landing page or social feed to a service-line page, newsletter, office QR code, or broader campaign.</p></div>
+          <div class="subscription">The one-year subscription is not priced by completion, so a client can activate the HRA across relevant touchpoints.</div>
+        </div>
+
+        <div class="activation-map" aria-label="Paid and owned channels connecting to an HRA conversion layer">
+          <article class="channel-stack paid"><h3>Paid + performance marketing</h3><p>Reach active hand raisers and create awareness with messages designed for different levels of intent.</p><div class="channel-list"><span>Paid search</span><span>Paid social</span><span>Paid content</span><span>Retargeting</span></div></article>
+          <article class="conversion-layer"><h3>HRA conversion layer</h3><p>One clinically grounded experience can support many entry points while keeping the journey measurable.</p><div class="conversion-steps"><span>Assess</span><span>Segment</span><span>Personalize CTA</span><span>Nurture</span></div></article>
+          <article class="channel-stack owned"><h3>Owned + integrated marketing</h3><p>Give existing audiences and site visitors an engaging next step across digital, content, OOH, and traditional touchpoints.</p><div class="channel-list"><span>Service-line pages</span><span>Homepage or HRA hub</span><span>Email + newsletter</span><span>QR + in-office</span><span>OOH + traditional</span></div></article>
+        </div>
+        <div class="measurement-row" aria-label="Activation measurement layers">
+          <div><small>01 · Source</small><strong>UTMs and campaign attribution</strong></div>
+          <div><small>02 · Engage</small><strong>HRA starts and completions</strong></div>
+          <div><small>03 · Act</small><strong>CTA and follow-up engagement</strong></div>
+          <div><small>04 · Outcome</small><strong>Encounters, patients, and ROI</strong></div>
+        </div>
+
+        <div class="activation-explorer">
+          <div class="activation-tabs" role="tablist" aria-label="Explore HRA activation channels">
+            <button class="activation-tab" type="button" role="tab" data-activation="search" aria-selected="true"><small>Active intent</small><strong>Paid search</strong></button>
+            <button class="activation-tab" type="button" role="tab" data-activation="social" aria-selected="false"><small>Awareness</small><strong>Paid social</strong></button>
+            <button class="activation-tab" type="button" role="tab" data-activation="owned" aria-selected="false"><small>Existing traffic</small><strong>Owned + organic</strong></button>
+            <button class="activation-tab" type="button" role="tab" data-activation="integrated" aria-selected="false"><small>Everywhere relevant</small><strong>Integrated marketing</strong></button>
+          </div>
+          <article class="activation-panel" role="tabpanel" aria-live="polite">
+            <div class="activation-copy"><p class="eyebrow" id="activation-kicker">Paid search · Capture active hand raisers</p><h3 id="activation-title">Match a specific search to a focused HRA path.</h3><p id="activation-copy">Search reaches consumers using terms that signal they are primed to learn or act. A targeted landing page provides context and trust before inviting them into the HRA.</p><div class="activation-detail" id="activation-detail"><strong>Campaign design:</strong> A cardiovascular service-line campaign and a dedicated Heart HRA campaign can run together with controlled keyword strategies—capturing different funnel stages without competing against each other.</div><div class="activation-links" id="activation-links"></div></div>
+            <figure class="activation-visual"><img id="activation-image" src="assets/heart-paid-search-landing-page.jpg" alt="Dedicated Heart HRA paid search landing page"></figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="eyebrow">04 · See the whole experience</p><h2>The questions matter. So does <span>everything around them.</span></h2></div>
+          <p class="lede">Explore one connected journey. Each stage should feel relevant to the consumer and operationally useful to the healthcare organization.</p>
+        </div>
+        <div class="journey-tabs" role="tablist" aria-label="HRA journey stages">
+          <button class="journey-tab" type="button" role="tab" data-stage="reach" aria-selected="true"><small>01</small><strong>Reach</strong></button>
+          <button class="journey-tab" type="button" role="tab" data-stage="choose" aria-selected="false"><small>02</small><strong>Choose</strong></button>
+          <button class="journey-tab" type="button" role="tab" data-stage="assess" aria-selected="false"><small>03</small><strong>Assess</strong></button>
+          <button class="journey-tab" type="button" role="tab" data-stage="act" aria-selected="false"><small>04</small><strong>Act</strong></button>
+          <button class="journey-tab" type="button" role="tab" data-stage="continue" aria-selected="false"><small>05</small><strong>Continue</strong></button>
+        </div>
+        <article class="journey-panel" role="tabpanel" aria-live="polite">
+          <div class="journey-copy"><p class="eyebrow" id="journey-kicker">Reach · Create a relevant door</p><h3 id="journey-title">Meet a consumer in the moment of curiosity.</h3><p id="journey-copy">Paid search, organic search, a health system website, paid social, email, and AI-assisted research can all lead to an HRA. The message and destination should match the consumer’s intent.</p><div class="journey-note" id="journey-note"><strong>Remember:</strong> An HRA is a useful next step after research—not simply another campaign landing page.</div></div>
+          <figure class="journey-visual"><img id="journey-image" src="assets/nspc-hra-results.jpg" alt="National Spine and Pain mobile HRA experience"></figure>
+        </article>
+
+        <div class="principles" id="clinical">
+          <article class="principle"><h3>Clinically grounded</h3><p>Each HRA follows an assessment-specific clinical framework. Depending on the HRA, this may include recognized models such as Framingham or Oxford, validated instruments, guidelines, or other condition-specific sources.</p><a href="https://hra-support.unlockhealth.com/specific-hra-app-documentation" target="_blank" rel="noopener noreferrer">Clinical documentation ↗</a></article>
+          <article class="principle"><h3>White-label by design</h3><p>Brand, imagery, messaging, domain, entry paths, and CTAs can align to the client’s digital experience so the HRA feels like a natural extension of the healthcare organization.</p><a href="https://hra-support.unlockhealth.com/setting-up-your-customization-options" target="_blank" rel="noopener noreferrer">Customization options ↗</a></article>
+          <article class="principle"><h3>Configured around the strategy</h3><p>Custom questions, result pathways, selection pages, and CTAs connect the assessment to real service-line goals, available care, and operational ownership.</p><a href="https://hra-support.unlockhealth.com/ctas-strategy-guide" target="_blank" rel="noopener noreferrer">CTA strategy guide ↗</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section peach" id="connect">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="eyebrow">05 · Continue the relationship</p><h2>HRAs don’t stop on the <span>results screen.</span></h2></div>
+          <p class="lede">Nurturing allows clients to establish trust, create continued brand touchpoints, and inspire action. They can use follow-up built into the HRA Management Console, connect their existing systems, or combine both approaches.</p>
+        </div>
+        <div class="connection-choice">
+          <article class="connection-card"><span class="label">Built into the HRA Management Console</span><h3>Built-in follow-up<br><span class="muted">“CRM lite”</span></h3><p>A focused option for continuing the relationship without requiring a separate client platform for every workflow.</p><ul><li>Send the consumer’s HRA report by email</li><li>Build nurture email journeys</li><li>Send reminder emails that bring people back</li><li>Manage CTAs and follow-up plans within the HRA program</li></ul></article>
+          <div class="choice-or" aria-hidden="true">OR</div>
+          <article class="connection-card"><span class="label">Connect the client ecosystem</span><h3>Industry-leading and proprietary systems</h3><p>Unlock offers integrations with industry-leading CRMs and marketing automation tools such as Salesforce and Marketo.</p><ul><li>Extend approved, consented HRA data into existing workflows</li><li>Support CRM, marketing automation, and centralized data strategies</li><li>Connect proprietary systems through Universal Webhook</li><li>Exchange approved data through sFTP when appropriate</li></ul><a class="text-link" href="https://hra-support.unlockhealth.com/about-hra-integrations" target="_blank" rel="noopener noreferrer">Explore HRA integrations ↗</a></article>
+        </div>
+        <div class="both-note"><p><strong>The power of integrated systems:</strong> HRA engagement can become part of a more centralized consumer strategy—supporting relevant outreach, consistent brand experiences, operational routing, and a clearer connection to downstream outcomes.</p></div>
+        <div class="integration-flow" aria-label="Example connected HRA data flow">
+          <div class="flow-step"><small>Experience</small><b>White-label HRA</b><span>Questions, result logic, consent, and a personalized CTA.</span></div>
+          <div class="flow-step"><small>Choose</small><b>Console follow-up and/or connected systems</b><span>Match the pathway to the client’s technology and operating model.</span></div>
+          <div class="flow-step"><small>Activate</small><b>Email, nurture, CRM, MAP, or CDP</b><span>Continue education, reminders, routing, and outreach.</span></div>
+          <div class="flow-step"><small>Learn</small><b>Engagement, encounters, and ROI</b><span>Connect program activity to downstream outcomes where approved data allows.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="measure">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="eyebrow">06 · Manage, measure, improve</p><h2>The Console is the client’s <span>self-service command center.</span></h2></div>
+          <p class="lede">Clients can review activity, manage their HRA program, and make changes to their experiences when desired. Reporting helps teams move from initial engagement through action—and connect HRA activity to downstream encounters and business outcomes when approved data and attribution are available.</p>
+        </div>
+        <div class="self-service-strip" aria-label="Self-service Console capabilities">
+          <div><small>Review</small><strong>Monitor HRA activity and program performance</strong></div>
+          <div><small>Manage</small><strong>Adjust HRAs, CTAs, and follow-up plans</strong></div>
+          <div><small>Improve</small><strong>Use reporting signals to optimize the experience</strong></div>
+        </div>
+        <div class="report-layout">
+          <div class="report-tabs" role="tablist" aria-label="Console views">
+            <button class="report-tab" type="button" role="tab" data-report="dashboard" aria-selected="true">Program dashboard<small>Manage active HRAs</small></button>
+            <button class="report-tab" type="button" role="tab" data-report="funnel" aria-selected="false">Engagement funnel<small>See progression and drop-off</small></button>
+            <button class="report-tab" type="button" role="tab" data-report="trends" aria-selected="false">Performance trends<small>Compare change over time</small></button>
+            <button class="report-tab" type="button" role="tab" data-report="cta" aria-selected="false">CTA pathways<small>Connect results to action</small></button>
+          </div>
+          <article class="report-panel" role="tabpanel" aria-live="polite">
+            <h3 id="report-title">See program health across active HRAs.</h3>
+            <p id="report-copy">Review lead capture, results, status, and program actions in one operational view.</p>
+            <figure><img id="report-image" src="assets/console-dashboard.jpg" alt="HRA Management program dashboard"><figcaption id="report-caption">Illustrative HRA Management demo environment.</figcaption></figure>
+          </article>
+        </div>
+        <div class="report-scope"><p><strong>These are representative views—not the full reporting library.</strong> Beyond engagement funnels and performance trends, clients can explore additional reporting across the consumer journey.</p><div class="report-topics" aria-label="Additional HRA reporting areas"><span>CTA performance</span><span>Demographics</span><span>Assessment results</span><span>Traffic sources</span><span>Benchmark comparisons</span><span>Follow-up performance</span></div></div>
+        <div class="measure-ladder" aria-label="Measurement progression">
+          <div><small>Attention</small><strong>Source and starts</strong></div>
+          <div><small>Engagement</small><strong>Lead capture and completion</strong></div>
+          <div><small>Action</small><strong>CTA and follow-up activity</strong></div>
+          <div><small>Outcome</small><strong>Downstream encounters and ROI</strong></div>
+        </div>
+
+        <div class="case-grid">
+          <article class="case"><div><p class="eyebrow">Proof · CHRISTUS Health</p><h3>Breast-health engagement connected to attributed patients.</h3><p>CHRISTUS paired its Breast Cancer HRA with CRM routing, call attribution, patient-engagement support, nurture, and direct outreach.</p><div class="case-metrics"><span><strong>520</strong><small>attributed patients</small></span><span><strong>94</strong><small>new patients</small></span></div><a class="text-link" href="https://engage.unlockhealth.com/hubfs/UH_CS_CHRISTUS_03182026.pdf" target="_blank" rel="noopener noreferrer">Read case study ↗</a></div><img src="assets/christus-hra-results.jpg" alt="CHRISTUS Breast Cancer HRA result paths"></article>
+          <article class="case"><div><p class="eyebrow">Proof · National Spine &amp; Pain</p><h3>An integrated acquisition journey delivered measurable ROI.</h3><p>National Spine &amp; Pain connected a shortened Back & Neck HRA with SEM and strategic follow-up.</p><div class="case-metrics"><span><strong>10%</strong><small>conversion rate</small></span><span><strong>324%</strong><small>ROI</small></span></div><a class="text-link" href="https://engage.unlockhealth.com/hubfs/PDFs/CS_NSPC-HRA-SEM.pdf" target="_blank" rel="noopener noreferrer">Read case study ↗</a></div><img src="assets/nspc-hra-results.jpg" alt="National Spine and Pain Back and Neck HRA"></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resources">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="eyebrow">Keep exploring</p><h2>You know the story. Here is where to go <span>deeper.</span></h2></div>
+          <p class="lede">These are supporting destinations, not required reading. Use the resource that answers the next question in your conversation.</p>
+        </div>
+        <div class="resource-grid">
+          <a class="resource" href="https://hra-support.unlockhealth.com/" target="_blank" rel="noopener noreferrer"><small>Start here</small><strong>HRA Resource Center</strong><span>Explore the complete collection of HRA product, strategy, clinical, activation, and reporting guidance.</span><em>Open Resource Center ↗</em></a>
+          <a class="resource" href="#explore"><small>Experience</small><strong>Try an HRA demo</strong><span>Return to the service-line catalog and open a consumer experience.</span><em>Browse demos ↑</em></a>
+          <a class="resource" href="https://hra-support.unlockhealth.com/specific-hra-app-documentation" target="_blank" rel="noopener noreferrer"><small>Clinical</small><strong>HRA-specific documentation</strong><span>Review the clinical basis and framework for a specific assessment.</span><em>Open Resource Hub ↗</em></a>
+          <a class="resource" href="https://key.unlockhealth.com/space/SL/1020690480/Case+Studies" target="_blank" rel="noopener noreferrer"><small>Proof</small><strong>All HRA case studies</strong><span>Open the table on The Key and filter using the HRA tag.</span><em>Open The Key ↗</em></a>
+          <a class="resource" href="https://hra-support.unlockhealth.com/ctas-strategy-guide" target="_blank" rel="noopener noreferrer"><small>Strategy</small><strong>CTA strategy guide</strong><span>Connect different result pathways to relevant, available actions.</span><em>Open guide ↗</em></a>
+          <a class="resource" href="https://hra-support.unlockhealth.com/nurture-journey-overview" target="_blank" rel="noopener noreferrer"><small>Follow-up</small><strong>Nurture journey overview</strong><span>Understand how built-in email follow-up can continue the relationship.</span><em>Open overview ↗</em></a>
+          <a class="resource" href="https://hra-support.unlockhealth.com/about-hra-integrations" target="_blank" rel="noopener noreferrer"><small>Integrations</small><strong>About HRA integrations</strong><span>Review options for connecting HRA data and activity to client systems and workflows.</span><em>Open integration guide ↗</em></a>
+          <a class="resource" href="https://hra-support.unlockhealth.com/understanding-reporting-in-the-hra-console" target="_blank" rel="noopener noreferrer"><small>Measurement</small><strong>HRA Console reporting</strong><span>Explore reporting views and the questions they help teams answer.</span><em>Open reporting guide ↗</em></a>
+          <div class="resource placeholder"><small>Coming soon</small><strong>Service-line one-sheeters</strong><span>Placeholder for forthcoming sales and enablement materials.</span><em>Owner · TBD</em></div>
+        </div>
+        <div class="access-note"><p><strong>Unlocker access:</strong> Need access to the HRA Management Console or supporting resources? The HRA Support team can get you set up and point you to the right materials.</p><a href="mailto:hrasupport@unlockhealthnow.com">Email HRA Support ↗</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="shell footer-inner"><span>HRA 101 · v3 internal review · September 2026</span><a class="back-top" href="#top">Back to top ↑</a></div></footer>
+
+  <script>
+    "use strict";
+
+    const GUIDES = {
+      learn: { kicker: "Best first visit", title: "Understand the story, then make it real.", copy: "Learn why the product exists, open one live demo, and see how omnichannel activation, follow-up, and measurement extend the experience.", links: [["Learn the essential idea", "#what"], ["Try a live HRA", "#explore"], ["See how clients activate", "#activation"], ["See measurement and proof", "#measure"]] },
+      explain: { kicker: "For a client or team conversation", title: "Use one clear sentence, one real experience, and one proof point.", copy: "Start with the gap between curiosity and appointment readiness. Then show where HRAs fit in the broader strategy, the client-branded experience, and what happens after the result.", links: [["Start with the definition", "#what"], ["Show the activation strategy", "#activation"], ["Explain follow-up and integrations", "#connect"], ["Open a case study", "#measure"]] },
+      see: { kicker: "The fastest path", title: "Choose a service line and take the HRA yourself.", copy: "The live demos make the questions, brand expression, result path, and calls to action tangible in a way a feature list cannot.", links: [["Browse all HRA demos", "#explore"], ["See selection pages", "#explore"], ["Explore the result journey", "#experience"]] },
+      resource: { kicker: "Quick-reference path", title: "Jump directly to the asset that answers your question.", copy: "Find clinical documentation, case studies, strategy guidance, reporting help, and forthcoming service-line one-sheeters.", links: [["Clinical documentation", "#clinical"], ["Case studies and proof", "#measure"], ["Open the resource center", "#resources"]] }
+    };
+
+    const HRA_CATALOG = [
+      { category: "Cardiovascular", name: "Heart", demo: "https://hra-demo.unlockhealthnow.com/v3/15338896-611a-4a86-884f-d98854647fbd?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#heart-hra" },
+      { category: "Cardiovascular", name: "Heart (Spanish)", demo: "https://hra-demo.unlockhealthnow.com/v3/15d7ba1e-88b9-46b0-9a6d-271d5ac23853?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#heart-spanish-hra" },
+      { category: "Cardiovascular", name: "Stroke", demo: "https://hra-demo.unlockhealthnow.com/v3/3d94c6e9-a8e5-4456-a09b-4362d4e54cfd?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#stroke-hra" },
+      { category: "Cardiovascular", name: "Peripheral Artery Disease", demo: "https://hra-demo.unlockhealthnow.com/v3/e033cff8-d9d7-46ba-9b42-bcf1b9d2b3a8?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#peripheral-artery-disease-hra" },
+      { category: "Oncology", name: "Breast Cancer", demo: "https://hra-demo.unlockhealthnow.com/v3/485bcde3-2b5d-46a0-ad91-a752d8764fec?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#breast-cancer-hra" },
+      { category: "Oncology", name: "Breast Cancer (Spanish)", demo: "https://hra-demo.unlockhealthnow.com/v3/bce6e64f-956a-4811-9547-57ed85b0b459/?fakedata=true&utm_medium=google&utm_campaign=breast-awareness", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#breast-cancer-spanish-hra" },
+      { category: "Oncology", name: "Prostate Cancer", demo: "https://hra-demo.unlockhealthnow.com/v3/31dfc313-120a-460e-9137-bd6f3f436687?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#prostate-cancer-hra" },
+      { category: "Oncology", name: "Colon Cancer", demo: "https://hra-demo.unlockhealthnow.com/v3/4e91687b-923d-4d93-a58a-ce87fa82c4ab?utm_source=google&utm_medium=landingpage", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#colon-cancer-hra" },
+      { category: "Oncology", name: "Lung Cancer", demo: "https://hra-demo.unlockhealthnow.com/v3/0c3c5625-a215-4606-8692-b67a728d7114?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#lung-cancer-hra" },
+      { category: "Behavioral Health", name: "Depression", demo: "https://hra-demo.unlockhealthnow.com/v3/14a6d086-1ce7-448b-8407-9313a677f015?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#depression-hra" },
+      { category: "Behavioral Health", name: "Anxiety", demo: "https://hra-demo.unlockhealthnow.com/v3/976ffafb-9f58-4c35-97f1-425395f454c2?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#anxiety-hra" },
+      { category: "Behavioral Health", name: "Substance Use", demo: "https://hra-demo.unlockhealthnow.com/v3/c3bc845f-d0e1-4f52-ba90-87715c4597f9?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#substance-use-hra" },
+      { category: "Orthopedics", name: "Back & Neck", demo: "https://hra-demo.unlockhealthnow.com/v3/1a01c2ee-44f4-4ee3-9bcd-149dd6620887?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#back-neck-hra" },
+      { category: "Orthopedics", name: "Knee & Hip", demo: "https://hra-demo.unlockhealthnow.com/v3/ddf48967-1432-452b-a26b-520e026d384f?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#knee-hip-hra" },
+      { category: "Orthopedics", name: "Shoulder & Elbow", demo: "https://hra-demo.unlockhealthnow.com/v3/2777c6a1-6eae-4f6a-85b1-c31c9188a125?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#shoulder-elbow-hra" },
+      { category: "Pulmonology", name: "COPD", demo: "https://hra-demo.unlockhealthnow.com/v3/3f1087ba-2e2f-4858-be10-c7b94edb5e33?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#copd-hra" },
+      { category: "Pulmonology", name: "Sleep Apnea", demo: "https://hra-demo.unlockhealthnow.com/v3/52a1a3a2-166d-4edf-b5b4-afccfd748625?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#sleep-hra" },
+      { category: "Internal Medicine", name: "Diabetes", demo: "https://hra-demo.unlockhealthnow.com/v3/40fda585-bde1-4a89-a9f2-0f7b23ce8f33?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#diabetes-hra" },
+      { category: "Internal Medicine", name: "Diabetes (Spanish)", demo: "https://hra-demo.unlockhealthnow.com/v3/b07890bb-0daf-4793-9513-9fe6d9b5819b?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#diabetes-spanish-hra" },
+      { category: "Internal Medicine", name: "Acid Reflux", demo: "https://hra-demo.unlockhealthnow.com/v3/10f41014-b026-4fe0-a320-4f731e597be5?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#acid-reflux-hra" },
+      { category: "Internal Medicine", name: "Bladder Control", demo: "https://hra-demo.unlockhealthnow.com/v3/11e4b957-b5ed-4fe1-8bb6-2515e2011b75?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#bladder-control-hra" },
+      { category: "Internal Medicine", name: "Menopause Continuum", demo: "https://hra-demo.unlockhealthnow.com/v3/fb9683b4-1739-41e5-bbb6-a60cb791e32b?utm_source=demo&fakedata=true", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation" },
+      { category: "Weight Management", name: "Weight Loss", demo: "https://hra-demo.unlockhealthnow.com/v3/d11badb6-967f-4c7e-925b-6b605a8a4cbb?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#weight-loss-hra" },
+      { category: "Weight Management", name: "Medical Weight Loss", demo: "https://hra-demo.unlockhealthnow.com/v3/09ed1638-7ff9-4c7c-9759-381f67af2dfd?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation" },
+      { category: "Weight Management", name: "Healthy Weight", demo: "https://hra-demo.unlockhealthnow.com/v3/cb14d8b4-71b9-4a7d-87e6-933933054585/?fakedata=true&utm_source=google&utm_medium=paid-search&utm_campaign=hra-demo", doc: "https://hra-support.unlockhealth.com/specific-hra-app-documentation#healthy-weight-hra" }
+    ];
+
+    const CATEGORY_COPY = {
+      "Cardiovascular": "Heart and vascular education, risk awareness, and next-step guidance.",
+      "Oncology": "Screening and risk-related guidance across priority cancer service lines.",
+      "Behavioral Health": "Private education and a clearer path to appropriate support.",
+      "Orthopedics": "Guidance for musculoskeletal concerns and relevant care paths.",
+      "Pulmonology": "Respiratory and sleep concerns connected to supported next steps.",
+      "Internal Medicine": "Common chronic, digestive, bladder, and life-stage concerns.",
+      "Weight Management": "Weight-health education and relevant program options."
+    };
+
+    const ACTIVATIONS = {
+      search: {
+        kicker: "Paid search · Capture active hand raisers",
+        title: "Match a specific search to a focused HRA path.",
+        copy: "Search reaches consumers using terms that signal they are primed to learn or act. A targeted landing page provides context and trust before inviting them into the HRA.",
+        detail: "<strong>Campaign design:</strong> A cardiovascular service-line campaign and a dedicated Heart HRA campaign can run together with controlled keyword strategies—capturing different funnel stages without competing against each other.",
+        image: "assets/heart-paid-search-landing-page.jpg",
+        alt: "Dedicated Heart HRA paid search landing page",
+        links: [["Open the live Heart landing page ↗", "https://national-health.unlockhealth.com/heart-hra-landing-page/"], ["Paid promotion guide ↗", "https://hra-support.unlockhealth.com/hra-paid-promotion-best-practices"]]
+      },
+      social: {
+        kicker: "Paid social · Create awareness",
+        title: "Invite a passive audience to act immediately.",
+        copy: "People scrolling a social feed may not know they have a problem or be actively looking for care. Clear creative can spark recognition and link directly to the HRA for the instant gratification the channel rewards.",
+        detail: "<strong>Experience design:</strong> Keep the message simple, make the benefit immediately clear, and remove extra steps between the ad and the assessment.",
+        image: "assets/ortho-paid-social-ad.png",
+        alt: "Orthopedic HRA paid social advertisement in a social feed",
+        links: [["Paid promotion guide ↗", "https://hra-support.unlockhealth.com/hra-paid-promotion-best-practices"]]
+      },
+      owned: {
+        kicker: "Owned + organic · Activate existing attention",
+        title: "Give site visitors a useful next step.",
+        copy: "Service-line pages, the homepage, an HRA hub, newsletters, and targeted email audiences can all turn existing attention into engagement without buying another click.",
+        detail: "<strong>AI-search opportunity:</strong> As AI overviews answer more health questions directly, consumers may arrive at a nearby health system through organic discovery. An HRA gives that visitor something relevant to do next.",
+        image: "assets/hra-hub-page.jpg",
+        alt: "Health system website HRA hub with assessments organized by service line",
+        links: [["Open the live HRA hub ↗", "https://go.unlockhealthnow.com/hra-sample-site-home/"], ["Organic promotion guide ↗", "https://hra-support.unlockhealth.com/hra-organic-promotion-best-practices"]]
+      },
+      integrated: {
+        kicker: "Integrated marketing · Reinforce the journey",
+        title: "Make the HRA a conversion layer across the campaign.",
+        copy: "Content, OOH, direct mail, events, office materials, and other traditional touchpoints can use short URLs or QR codes to give the audience an interactive next step.",
+        detail: "<strong>Omnichannel principle:</strong> Repeated, relevant exposure across paid and owned channels builds familiarity while consistent tracking shows which entry points drive assessment and CTA activity.",
+        image: "assets/omnichannel-activation-strategy.jpg",
+        alt: "Orthopedic HRA activation strategy showing layered paid and owned channels",
+        links: [["Paid promotion guide ↗", "https://hra-support.unlockhealth.com/hra-paid-promotion-best-practices"], ["Organic promotion guide ↗", "https://hra-support.unlockhealth.com/hra-organic-promotion-best-practices"]]
+      }
+    };
+
+    const JOURNEY = {
+      reach: { kicker: "Reach · Create a relevant door", title: "Meet a consumer in the moment of curiosity.", copy: "Paid search, organic search, a health system website, paid social, email, and AI-assisted research can all lead to an HRA. The message and destination should match the consumer’s intent.", note: "An HRA is a useful next step after research—not simply another campaign landing page.", image: "assets/nspc-hra-results.jpg", alt: "National Spine and Pain mobile HRA experience" },
+      choose: { kicker: "Choose · Reduce uncertainty", title: "Help someone find the right starting point.", copy: "A focused campaign may lead directly to one HRA. A broader service-line experience can use a selection page to help the consumer choose among related assessments.", note: "The experience should reflect how consumers describe their need, not require knowledge of health-system structure.", image: "assets/ortho-selection-page.jpg", alt: "Orthopedic HRA selection page" },
+      assess: { kicker: "Assess · Build understanding", title: "Ask only what supports the intended guidance.", copy: "Clinically reviewed questions gather relevant context and shape the result pathway. The experience remains educational and pre-diagnostic.", note: "Every HRA has its own clinical framework; use HRA-specific documentation for the exact methodology.", image: "assets/christus-hra-results.jpg", alt: "CHRISTUS Breast Cancer HRA result examples" },
+      act: { kicker: "Act · Recommend an appropriate next step", title: "Make the result useful—not merely interesting.", copy: "The result can connect a consumer to scheduling, provider search, screening, a callback, education, a related HRA, or another care pathway the organization can support.", note: "CTA strategy should reflect the result, service-line capacity, and operational ownership.", image: "assets/heart-recommended-cta.jpg", alt: "Heart HRA result with appointment and related-assessment calls to action" },
+      continue: { kicker: "Continue · Keep the relationship moving", title: "Nurturing builds trust and inspires action.", copy: "Report emails, nurture journeys, reminders, connected systems, and ongoing reporting create continued brand touchpoints after the consumer receives a result.", note: "Clients can use follow-up built into the HRA Management Console, connect their own ecosystem, or combine both approaches.", image: "assets/console-cta-mapping.jpg", alt: "HRA Management calls-to-action mapping screen" }
+    };
+
+    const REPORTS = {
+      dashboard: { title: "Review and manage active HRAs in one place.", copy: "The self-service dashboard surfaces lead capture, results, and status while providing direct paths to customize HRAs, manage follow-up plans, build URLs, and preview experiences.", image: "assets/console-dashboard.jpg", alt: "HRA Management program dashboard", caption: "Portfolio-level visibility and management tools help clients run their HRA programs after launch." },
+      funnel: { title: "Understand progression from start to action.", copy: "See where consumers begin, provide information, complete the HRA, and engage with calls to action.", image: "assets/console-performance-funnel.jpg", alt: "HRA Console performance funnel", caption: "Funnel reporting makes conversion and drop-off visible." },
+      trends: { title: "Compare performance over time and across HRAs.", copy: "Spot seasonality, campaign effects, and assessments that may need more promotion or experience optimization.", image: "assets/console-performance-trends.jpg", alt: "HRA Console performance trends chart", caption: "Trend views turn a static result into an ongoing management cadence." },
+      cta: { title: "Connect different results to different actions.", copy: "Review how result pathways map to scheduling, callbacks, education, related HRAs, and other supported next steps.", image: "assets/console-cta-mapping.jpg", alt: "HRA calls-to-action mapping interface", caption: "CTA configuration keeps recommendations relevant and operational." }
+    };
+
+    document.querySelectorAll(".guide-button").forEach((button) => button.addEventListener("click", () => {
+      document.querySelectorAll(".guide-button").forEach((item) => item.setAttribute("aria-pressed", item === button ? "true" : "false"));
+      const guide = GUIDES[button.dataset.guide];
+      document.getElementById("guide-kicker").textContent = guide.kicker;
+      document.getElementById("guide-title").textContent = guide.title;
+      document.getElementById("guide-copy").textContent = guide.copy;
+      document.getElementById("guide-links").innerHTML = guide.links.map(([label, href]) => `<a href="${href}">${label}</a>`).join("");
+    }));
+
+    let activeCategory = "All";
+    let catalogExpanded = false;
+    const categories = ["All", ...new Set(HRA_CATALOG.map((item) => item.category))];
+    document.getElementById("catalog-filters").innerHTML = categories.map((category, index) => `<button class="filter-button" type="button" data-category="${category}" aria-pressed="${index === 0}">${category}</button>`).join("");
+
+    function renderCatalog() {
+      const query = document.getElementById("hra-search").value.trim().toLowerCase();
+      const matches = HRA_CATALOG.filter((item) => (activeCategory === "All" || item.category === activeCategory) && (!query || `${item.name} ${item.category}`.toLowerCase().includes(query)));
+      const visible = catalogExpanded || query || activeCategory !== "All" ? matches : matches.slice(0, 6);
+      document.getElementById("catalog-grid").classList.toggle("expanded", catalogExpanded || Boolean(query) || activeCategory !== "All");
+      document.getElementById("catalog-grid").innerHTML = visible.map((item) => `<article class="hra-card"><small>${item.category}</small><h3>${item.name}</h3><p>${CATEGORY_COPY[item.category]}</p><div class="hra-links"><a href="${item.demo}" target="_blank" rel="noopener noreferrer">Try demo ↗</a><a href="${item.doc}" target="_blank" rel="noopener noreferrer">Clinical notes ↗</a></div></article>`).join("");
+      document.getElementById("catalog-count").textContent = `${matches.length} HRA${matches.length === 1 ? "" : "s"} found${visible.length < matches.length ? ` · showing ${visible.length}` : ""}`;
+      const toggle = document.getElementById("catalog-toggle");
+      toggle.hidden = Boolean(query) || activeCategory !== "All";
+      toggle.textContent = catalogExpanded ? "Show a shorter list" : "Show all HRAs";
+    }
+
+    document.querySelectorAll(".filter-button").forEach((button) => button.addEventListener("click", () => {
+      activeCategory = button.dataset.category;
+      document.querySelectorAll(".filter-button").forEach((item) => item.setAttribute("aria-pressed", item === button ? "true" : "false"));
+      renderCatalog();
+    }));
+    document.getElementById("hra-search").addEventListener("input", renderCatalog);
+    document.getElementById("catalog-toggle").addEventListener("click", () => { catalogExpanded = !catalogExpanded; renderCatalog(); });
+
+    document.querySelectorAll(".activation-tab").forEach((button) => button.addEventListener("click", () => {
+      document.querySelectorAll(".activation-tab").forEach((item) => item.setAttribute("aria-selected", item === button ? "true" : "false"));
+      const activation = ACTIVATIONS[button.dataset.activation];
+      document.getElementById("activation-kicker").textContent = activation.kicker;
+      document.getElementById("activation-title").textContent = activation.title;
+      document.getElementById("activation-copy").textContent = activation.copy;
+      document.getElementById("activation-detail").innerHTML = activation.detail;
+      document.getElementById("activation-links").innerHTML = activation.links.map(([label, href]) => `<a href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`).join("");
+      const image = document.getElementById("activation-image");
+      image.src = activation.image;
+      image.alt = activation.alt;
+    }));
+
+    document.querySelectorAll(".journey-tab").forEach((button) => button.addEventListener("click", () => {
+      document.querySelectorAll(".journey-tab").forEach((item) => item.setAttribute("aria-selected", item === button ? "true" : "false"));
+      const stage = JOURNEY[button.dataset.stage];
+      document.getElementById("journey-kicker").textContent = stage.kicker;
+      document.getElementById("journey-title").textContent = stage.title;
+      document.getElementById("journey-copy").textContent = stage.copy;
+      document.getElementById("journey-note").innerHTML = `<strong>Remember:</strong> ${stage.note}`;
+      const image = document.getElementById("journey-image");
+      image.src = stage.image;
+      image.alt = stage.alt;
+    }));
+
+    document.querySelectorAll(".report-tab").forEach((button) => button.addEventListener("click", () => {
+      document.querySelectorAll(".report-tab").forEach((item) => item.setAttribute("aria-selected", item === button ? "true" : "false"));
+      const report = REPORTS[button.dataset.report];
+      document.getElementById("report-title").textContent = report.title;
+      document.getElementById("report-copy").textContent = report.copy;
+      const image = document.getElementById("report-image");
+      image.src = report.image;
+      image.alt = report.alt;
+      document.getElementById("report-caption").textContent = report.caption;
+    }));
+
+    const navLinks = Array.from(document.querySelectorAll(".topnav a"));
+    const observedSections = navLinks.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
+    const observer = new IntersectionObserver((entries) => {
+      const active = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!active) return;
+      navLinks.forEach((link) => link.setAttribute("aria-current", link.getAttribute("href") === `#${active.target.id}` ? "true" : "false"));
+    }, { rootMargin: "-20% 0px -60%", threshold: [0, .2, .5] });
+    observedSections.forEach((section) => observer.observe(section));
+
+    document.querySelector('.guide-button[data-guide="learn"]').click();
+    document.querySelector('.activation-tab[data-activation="search"]').click();
+    renderCatalog();
+  </script>
+</body>
+</html>

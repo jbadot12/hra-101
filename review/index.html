@@ -240,6 +240,16 @@
     .access-note { display: flex; justify-content: space-between; gap: 24px; align-items: center; margin-top: 22px; padding: 20px 22px; border-left: 5px solid var(--blue-strong); background: var(--blue); }
     .access-note p { margin: 0; }
     .access-note a { flex: 0 0 auto; color: #8c0010; font-weight: 800; }
+    .article-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+    .article-card { display: flex; min-height: 245px; grid-column: span 2; flex-direction: column; padding: 25px; border: 1px solid #f0d1bd; border-radius: 16px; background: white; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+    .article-card:nth-child(n+4) { grid-column: span 3; }
+    .article-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .article-card-head { display: flex; justify-content: space-between; gap: 14px; align-items: center; }
+    .article-card small { color: #8c0010; font-size: .67rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .article-card .article-arrow { display: grid; width: 30px; height: 30px; flex: 0 0 auto; place-items: center; border-radius: 50%; color: white; background: var(--red); font-size: .82rem; }
+    .article-card h3 { margin: 24px 0 12px; font-size: 1.2rem; line-height: 1.25; letter-spacing: -.025em; }
+    .article-card p { margin: 0; color: var(--muted); font-size: .82rem; }
+    .article-card strong { margin-top: auto; padding-top: 22px; color: #8c0010; font-size: .78rem; }
     footer { padding: 34px 0; border-top: 1px solid var(--line); background: var(--ink); color: white; }
     .footer-inner { display: flex; justify-content: space-between; gap: 20px; color: #c9c9cb; font-size: .75rem; }
     .back-top { color: white; font-weight: 800; }
@@ -260,6 +270,8 @@
       .report-tabs { grid-template-columns: repeat(4, 1fr); }
       .report-tab { font-size: .8rem; }
       .case-grid { grid-template-columns: 1fr; }
+      .article-grid { grid-template-columns: repeat(2, 1fr); }
+      .article-card, .article-card:nth-child(n+4) { grid-column: auto; }
     }
     @media (max-width: 680px) {
       .shell { width: min(100% - 28px, 1180px); }
@@ -315,6 +327,7 @@
       .case { grid-template-columns: 1fr; }
       .case img { width: 100%; height: 360px; }
       .access-note { align-items: flex-start; flex-direction: column; }
+      .article-grid { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -559,6 +572,47 @@
           <div class="resource placeholder"><small>Coming soon</small><strong>Service-line one-sheeters</strong><span>Placeholder for forthcoming sales and enablement materials.</span><em>Owner · TBD</em></div>
         </div>
         <div class="access-note"><p><strong>Unlocker access:</strong> Need access to the HRA Management Console or supporting resources? The HRA Support team can get you set up and point you to the right materials.</p><a href="mailto:hrasupport@unlockhealthnow.com">Email HRA Support ↗</a></div>
+      </div>
+    </section>
+
+    <section class="section peach" id="thought-leadership">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="eyebrow">Thought leadership</p><h2>Keep building the <span>HRA story.</span></h2></div>
+          <p class="lede">Five HRA-focused reads that connect the product to employee engagement, the marketing funnel, prevention, omnichannel strategy, and cancer screening.</p>
+        </div>
+        <div class="article-grid">
+          <a class="article-card" href="https://unlockhealth.com/resources/blogs/how-health-risk-assessments-support-employee-engagement-and-retention-in-health-systems/" target="_blank" rel="noopener noreferrer">
+            <div class="article-card-head"><small>Employee engagement</small><span class="article-arrow" aria-hidden="true">↗</span></div>
+            <h3>How health risk assessments support employee engagement and retention in health systems</h3>
+            <p>Positions HRAs as an internal engagement, in-network utilization, and workforce retention tool.</p>
+            <strong>Read article ↗</strong>
+          </a>
+          <a class="article-card" href="https://unlockhealth.com/resources/blogs/marketing-funnel-health-risk-assessments/" target="_blank" rel="noopener noreferrer">
+            <div class="article-card-head"><small>Marketing funnel</small><span class="article-arrow" aria-hidden="true">↗</span></div>
+            <h3>Turn curiosity into care and power the full funnel with Unlock Health Risk Assessments</h3>
+            <p>Explains the Know me, Help me, Wow me full-funnel HRA framework.</p>
+            <strong>Read article ↗</strong>
+          </a>
+          <a class="article-card" href="https://unlockhealth.com/resources/blogs/health-risk-assessments-prevention-growth/" target="_blank" rel="noopener noreferrer">
+            <div class="article-card-head"><small>Prevention + growth</small><span class="article-arrow" aria-hidden="true">↗</span></div>
+            <h3>Connecting prevention and growth: how health risk assessments drive early detection and patient acquisition</h3>
+            <p>A patient-centered explanation of why HRAs work.</p>
+            <strong>Read article ↗</strong>
+          </a>
+          <a class="article-card" href="https://unlockhealth.com/resources/blogs/health-risk-assessment-strategy/" target="_blank" rel="noopener noreferrer">
+            <div class="article-card-head"><small>Omnichannel strategy</small><span class="article-arrow" aria-hidden="true">↗</span></div>
+            <h3>Creating a health risk assessment strategy that meets patients where they are across every channel</h3>
+            <p>Practical guidance for layering HRAs across email, paid media, social, local SEO, landing pages, and service-line pages.</p>
+            <strong>Read article ↗</strong>
+          </a>
+          <a class="article-card" href="https://unlockhealth.com/resources/blogs/health-literacy-cancer-screening/" target="_blank" rel="noopener noreferrer">
+            <div class="article-card-head"><small>Health literacy</small><span class="article-arrow" aria-hidden="true">↗</span></div>
+            <h3>Cancer screening literacy is the clearer path to completed care</h3>
+            <p>Connects oncology and screening education to the role HRAs can play in helping consumers take the next step.</p>
+            <strong>Read article ↗</strong>
+          </a>
+        </div>
       </div>
     </section>
   </main>

@@ -117,31 +117,41 @@
     .selection-callout img { width: 100%; height: 360px; padding: 12px; border-radius: 13px; object-fit: contain; object-position: center; background: #e5f0e5; }
     .text-link { display: inline-flex; align-items: center; gap: 8px; color: inherit; font-size: .86rem; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
     .activation-section { background: linear-gradient(145deg, #effaff 0%, #fff 48%, #fff7ef 100%); }
-    .activation-principle { display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: center; margin-bottom: 28px; padding: 22px 25px; border-radius: 16px; color: white; background: var(--ink); }
-    .activation-principle .spark { display: grid; width: 46px; height: 46px; place-items: center; border-radius: 50%; color: var(--ink); background: var(--blue-strong); font-size: 1.35rem; }
+    .activation-principle { display: flex; gap: 18px; align-items: center; margin-bottom: 34px; padding: 17px 20px; border: 1px solid #b7dfef; border-radius: 14px; color: var(--ink); background: var(--blue); }
+    .activation-principle .spark { display: grid; width: 42px; height: 42px; flex: 0 0 auto; place-items: center; border-radius: 50%; color: white; background: var(--red); font-size: 1.15rem; }
     .activation-principle strong { display: block; font-size: 1.03rem; }
-    .activation-principle p { margin: 4px 0 0; color: #cfcfd2; font-size: .84rem; }
-    .activation-principle .subscription { max-width: 230px; padding-left: 22px; border-left: 1px solid #45454a; font-size: .76rem; font-weight: 700; }
-    .activation-map { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 12px; align-items: stretch; }
-    .channel-stack, .conversion-layer { padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: white; box-shadow: var(--shadow); }
+    .activation-principle p { margin: 3px 0 0; color: #424247; font-size: .82rem; }
+    .activation-principle .subscription { max-width: 285px; margin-left: auto; padding: 10px 13px; border: 1px solid #b7dfef; border-radius: 9px; background: white; font-size: .73rem; font-weight: 700; }
+    .activation-system { padding: 26px 28px 30px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.72); box-shadow: var(--shadow); }
+    .activation-sources { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .channel-stack { min-height: 190px; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: white; }
     .channel-stack h3, .conversion-layer h3 { margin: 0 0 7px; font-size: 1.15rem; }
     .channel-stack > p, .conversion-layer > p { margin: 0 0 17px; color: var(--muted); font-size: .8rem; }
     .channel-list { display: flex; flex-wrap: wrap; gap: 7px; }
     .channel-list span { padding: 7px 9px; border-radius: 7px; background: var(--fog); font-size: .72rem; font-weight: 700; }
     .channel-stack.paid { border-top: 5px solid var(--red); }
     .channel-stack.owned { border-top: 5px solid #007b89; }
-    .conversion-layer { position: relative; color: white; border-color: var(--plum); background: var(--plum); }
-    .conversion-layer::before, .conversion-layer::after { position: absolute; top: 50%; color: var(--red); font-size: 1.15rem; font-weight: 900; transform: translateY(-50%); }
-    .conversion-layer::before { left: -11px; content: "→"; }
-    .conversion-layer::after { right: -11px; content: "←"; }
+    .activation-connectors { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; min-height: 88px; }
+    .source-connector { display: flex; gap: 12px; align-items: center; justify-content: center; color: #8c0010; font-size: .66rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+    .source-connector b { display: grid; width: 48px; height: 48px; flex: 0 0 auto; place-items: center; border-radius: 50%; color: white; background: var(--red); box-shadow: 0 10px 22px rgba(227,6,19,.24); font-size: 1.35rem; line-height: 1; }
+    .conversion-layer { max-width: 760px; margin: 0 auto; padding: 30px; color: white; border: 2px solid var(--plum); border-radius: 18px; background: var(--plum); box-shadow: 0 22px 55px rgba(77,39,63,.2); }
+    .conversion-layer > small { display: block; margin-bottom: 9px; color: #ffb3b9; font-size: .65rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .conversion-layer h3 { font-size: 1.55rem; letter-spacing: -.03em; }
     .conversion-layer > p { color: #eadde5; }
-    .conversion-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
-    .conversion-steps span { padding: 9px 5px; border-radius: 7px; color: var(--plum); background: white; font-size: .68rem; font-weight: 800; text-align: center; }
-    .measurement-row { display: grid; grid-template-columns: repeat(4, 1fr); margin: 13px 0 34px; border: 1px solid var(--line); border-radius: 13px; background: white; overflow: hidden; }
+    .conversion-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .conversion-steps span { padding: 11px 7px; border-radius: 8px; color: var(--plum); background: white; font-size: .72rem; font-weight: 800; text-align: center; }
+    .measurement-label { display: flex; justify-content: space-between; gap: 24px; align-items: baseline; margin: 32px 0 12px; }
+    .measurement-label strong { font-size: .95rem; }
+    .measurement-label span { color: var(--muted); font-size: .8rem; }
+    .measurement-row { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; border: 1px solid var(--line); border-radius: 13px; background: white; overflow: hidden; }
     .measurement-row div { padding: 15px 17px; }
     .measurement-row div + div { border-left: 1px solid var(--line); }
     .measurement-row small { display: block; color: #8c0010; font-size: .62rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
     .measurement-row strong { display: block; margin-top: 5px; font-size: .77rem; }
+    .activation-examples-head { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin: 64px 0 22px; }
+    .activation-examples-head h3 { margin: 0; font-size: clamp(2rem, 3.5vw, 3.5rem); line-height: 1; letter-spacing: -.05em; }
+    .activation-examples-head h3 span { color: var(--red); }
+    .activation-examples-head > p { max-width: 510px; margin: 0; color: var(--muted); font-size: 1rem; }
     .activation-explorer { border: 1px solid var(--line); border-radius: var(--radius); background: white; overflow: hidden; box-shadow: var(--shadow); }
     .activation-tabs { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
     .activation-tab { padding: 16px; border: 0; border-right: 1px solid var(--line); background: white; text-align: left; }
@@ -261,8 +271,7 @@
       .hero-grid, .section-head, .guide-result { grid-template-columns: 1fr; gap: 28px; }
       .hero-stage { min-height: 470px; }
       .catalog-grid, .principles, .resource-grid { grid-template-columns: repeat(2, 1fr); }
-      .activation-map { grid-template-columns: 1fr; }
-      .conversion-layer::before, .conversion-layer::after { display: none; }
+      .activation-examples-head { grid-template-columns: 1fr; gap: 14px; }
       .activation-panel { grid-template-columns: 1fr; }
       .connection-choice { grid-template-columns: 1fr; }
       .choice-or { margin: -4px auto; }
@@ -303,8 +312,17 @@
       .activation-reminder { align-items: flex-start; flex-direction: column; }
       .selection-callout, .journey-panel { grid-template-columns: 1fr; }
       .selection-callout img { height: 430px; }
-      .activation-principle { grid-template-columns: auto 1fr; }
-      .activation-principle .subscription { grid-column: 1 / -1; max-width: none; padding: 15px 0 0; border-top: 1px solid #45454a; border-left: 0; }
+      .activation-principle { align-items: flex-start; flex-direction: column; }
+      .activation-principle .subscription { max-width: none; margin-left: 0; }
+      .activation-system { padding: 18px; }
+      .activation-sources { grid-template-columns: 1fr; }
+      .activation-connectors { min-height: 74px; }
+      .source-connector span { display: none; }
+      .source-connector b { width: 44px; height: 44px; }
+      .conversion-layer { padding: 23px; }
+      .conversion-steps { grid-template-columns: 1fr 1fr; }
+      .measurement-label { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .activation-examples-head { margin-top: 48px; }
       .activation-tabs { display: flex; overflow-x: auto; }
       .activation-tab { min-width: 145px; }
       .activation-panel { padding: 21px; }
@@ -441,11 +459,19 @@
           <div class="subscription">The one-year subscription is not priced by completion, so a client can activate the HRA across relevant touchpoints.</div>
         </div>
 
-        <div class="activation-map" aria-label="Paid and owned channels connecting to an HRA conversion layer">
-          <article class="channel-stack paid"><h3>Paid + performance marketing</h3><p>Reach active hand raisers and create awareness with messages designed for different levels of intent.</p><div class="channel-list"><span>Paid search</span><span>Paid social</span><span>Paid content</span><span>Retargeting</span></div></article>
-          <article class="conversion-layer"><h3>HRA conversion layer</h3><p>One clinically grounded experience can support many entry points while keeping the journey measurable.</p><div class="conversion-steps"><span>Assess</span><span>Segment</span><span>Personalize CTA</span><span>Nurture</span></div></article>
-          <article class="channel-stack owned"><h3>Owned + integrated marketing</h3><p>Give existing audiences and site visitors an engaging next step across digital, content, OOH, and traditional touchpoints.</p><div class="channel-list"><span>Service-line pages</span><span>Homepage or HRA hub</span><span>Email + newsletter</span><span>QR + in-office</span><span>OOH + traditional</span></div></article>
+        <div class="activation-system" aria-label="Paid and owned channels feeding one measurable HRA conversion engine">
+          <div class="activation-sources">
+            <article class="channel-stack paid"><h3>Paid + performance marketing</h3><p>Create demand and capture active intent with messages designed for different stages of the funnel.</p><div class="channel-list"><span>Paid search</span><span>Paid social</span><span>Paid content</span><span>Retargeting</span></div></article>
+            <article class="channel-stack owned"><h3>Owned + integrated marketing</h3><p>Activate existing audiences and site visitors across digital, content, OOH, and traditional touchpoints.</p><div class="channel-list"><span>Service-line pages</span><span>Homepage or HRA hub</span><span>Email + newsletter</span><span>QR + in-office</span><span>OOH + traditional</span></div></article>
+          </div>
+          <div class="activation-connectors" aria-hidden="true">
+            <div class="source-connector"><span>Create + capture demand</span><b>↘</b></div>
+            <div class="source-connector"><b>↙</b><span>Activate existing audiences</span></div>
+          </div>
+          <article class="conversion-layer"><small>One measurable experience</small><h3>The HRA conversion engine</h3><p>Every relevant channel can lead into one clinically grounded experience that turns attention into education, segmentation, action, and continued engagement.</p><div class="conversion-steps"><span>Assess</span><span>Segment</span><span>Personalize CTA</span><span>Nurture</span></div></article>
         </div>
+
+        <div class="measurement-label"><strong>Measure the complete journey</strong><span>Follow performance from the first entry point through downstream value.</span></div>
         <div class="measurement-row" aria-label="Activation measurement layers">
           <div><small>01 · Source</small><strong>UTMs and campaign attribution</strong></div>
           <div><small>02 · Engage</small><strong>HRA starts and completions</strong></div>
@@ -453,6 +479,10 @@
           <div><small>04 · Outcome</small><strong>Encounters, patients, and ROI</strong></div>
         </div>
 
+        <div class="activation-examples-head">
+          <div><p class="eyebrow">Omnichannel in practice</p><h3>See the strategy <span>in action.</span></h3></div>
+          <p>Explore how each channel introduces the HRA at a different moment of consumer intent—and how the experience changes to match.</p>
+        </div>
         <div class="activation-explorer">
           <div class="activation-tabs" role="tablist" aria-label="Explore HRA activation channels">
             <button class="activation-tab" type="button" role="tab" data-activation="search" aria-selected="true"><small>Active intent</small><strong>Paid search</strong></button>

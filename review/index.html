@@ -823,12 +823,34 @@
 
     const navLinks = Array.from(document.querySelectorAll(".topnav a"));
     const observedSections = navLinks.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
-    const observer = new IntersectionObserver((entries) => {
-      const active = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!active) return;
-      navLinks.forEach((link) => link.setAttribute("aria-current", link.getAttribute("href") === `#${active.target.id}` ? "true" : "false"));
-    }, { rootMargin: "-20% 0px -60%", threshold: [0, .2, .5] });
-    observedSections.forEach((section) => observer.observe(section));
+    const setActiveNav = (sectionId) => {
+      navLinks.forEach((link) => link.setAttribute("aria-current", link.hash === `#${sectionId}` ? "true" : "false"));
+    };
+    const updateActiveNav = () => {
+      const headerHeight = document.querySelector(".topbar")?.offsetHeight || 0;
+      const readingLine = headerHeight + Math.min(160, window.innerHeight * .22);
+      let activeSection = observedSections[0];
+
+      observedSections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= readingLine) activeSection = section;
+      });
+
+      if (activeSection) setActiveNav(activeSection.id);
+    };
+    let navUpdateQueued = false;
+    const queueActiveNavUpdate = () => {
+      if (navUpdateQueued) return;
+      navUpdateQueued = true;
+      window.requestAnimationFrame(() => {
+        updateActiveNav();
+        navUpdateQueued = false;
+      });
+    };
+
+    navLinks.forEach((link) => link.addEventListener("click", () => setActiveNav(link.hash.slice(1))));
+    window.addEventListener("scroll", queueActiveNavUpdate, { passive: true });
+    window.addEventListener("resize", queueActiveNavUpdate);
+    updateActiveNav();
 
     document.querySelector('.guide-button[data-guide="learn"]').click();
     document.querySelector('.activation-tab[data-activation="search"]').click();
